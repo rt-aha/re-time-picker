@@ -86,11 +86,7 @@ const props = defineProps({
   },
   format: {
     type: String,
-    default: defaultFormat,
-    // validator: (val: string) => {
-    //   const matchResult = val.match(validRegExp);
-    //   return !!matchResult;
-    // },
+    default: () => defaultFormat,
   },
   disabled: {
     type: Boolean,
@@ -182,8 +178,8 @@ const formatType = computed<FormatType>(() => {
 
 const formatDefaultCustomText = computed<CustomText>(() => {
   return {
-    ...props.customText,
     ...defaultText,
+    ...props.customText,
   };
 });
 
@@ -279,7 +275,7 @@ const checkModelValue: () => [ValueMatchFormatType | null, string] = () => {
     if (remainderApm === '') {
       return ['hms', ''];
     }
-    const { am, pm } = props.customText;
+    const { am, pm } = formatDefaultCustomText.value;
     const isExist = [am, pm].includes(remainderApm);
 
     if (isExist) {
@@ -296,7 +292,7 @@ const checkModelValue: () => [ValueMatchFormatType | null, string] = () => {
       return ['hm', ''];
     }
 
-    const { am, pm } = props.customText;
+    const { am, pm } = formatDefaultCustomText.value;
     const isExist = [am, pm].includes(remainderApm);
     if (isExist) {
       return ['hm', remainderApm];

@@ -2,7 +2,7 @@
   <div class="v-time-picker">
     <ReTimePicker
       v-model="val1"
-      format="HH:mm:ss A"
+      format="A HH:mm:ss"
       :show-header="false"
       apm-column-placement="first"
       :custom-text="customText"
