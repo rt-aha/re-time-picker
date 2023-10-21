@@ -1,7 +1,16 @@
 {
   "name": "re-time-picker",
-  "private": true,
-  "version": "0.0.6",
+  "version": "0.0.7",
+  "license": "ISC",
+  "author": "Ray Tsai",
+  "description": "A time-picker component base on vue 3 with typescript.",
+  "homepage": "https://github.com/rt-aha/re-time-picker",
+  "bugs": "https://github.com/rt-aha/re-time-picker/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rt-aha/re-time-picker.git"
+  },
+  "private": false,
   "type": "module",
   "module": "./dist/index.es.js",
   "exports": {
