@@ -75,7 +75,8 @@ class Version {
 
   handleGitTag(ver) {
     sh.exec(`git tag -m "${this.updateContent}" -a ${ver}`);
-    sh.exec('git push --tag');
+    sh.exec('git push origin --tag');
+    sh.exec('git push github --tag');
   }
 
   handleGitCommit(ver) {
