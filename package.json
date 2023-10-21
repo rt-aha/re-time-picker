@@ -17,7 +17,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "tui": "sh tui.sh"
   },
   "dependencies": {
     "@vueuse/core": "^10.5.0",
