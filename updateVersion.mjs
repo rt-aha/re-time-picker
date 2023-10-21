@@ -82,7 +82,7 @@ class Version {
   handleGitCommit(ver) {
     sh.exec('git add .');
     sh.exec(`git commit -m ":tada: ${ver} ${this.updateContent}"`);
-    sh.exec('update-version');
+    sh.exec('pnpm tui');
   }
 
   updateVersion(ver) {
