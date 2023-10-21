@@ -1,7 +1,7 @@
 {
   "name": "re-time-picker",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "module": "./dist/index.es.js",
   "exports": {
@@ -18,6 +18,7 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
+    "update-version": "node updateVersion.mjs",
     "tui": "sh tui.sh"
   },
   "dependencies": {
