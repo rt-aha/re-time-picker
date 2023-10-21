@@ -1,0 +1,16 @@
+@import '@/styles/global/mixins';
+@import '@/styles/global/breakpoint';
+@mixin gen-g-content {
+   .g-content {
+    margin: 0 20px;
+  }
+  @each $key, $value in $breakpoint-setting {
+    @include rwd($key) {
+      .g-content {
+        width: map-get($value, g-content-width);
+        margin: 0 auto;
+      }
+    }
+  }
+}
+@include gen-g-content;

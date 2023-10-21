@@ -1,0 +1,26 @@
+$z-index-setting: (
+  // layout
+  lo-header: 1000,
+  lo-body: 1000,
+  lo-footer: 1000,
+  // drawer
+  drawer: 1050,
+  // other
+  dialog: 1100,
+  loading: 2000,
+
+);
+
+
+
+$zi-content: 10;
+$zi-content-bg-gradient: 9;
+$zi-mobile-header-content: 500;
+$zi-mobile-header: 550;
+$zi-header: 1000;
+$zi-dialog: 1100;
+$zi-drawer: 1050;
+$zi-modal: 1100;
+$zi-message: 1100;
+$zi-notification: 1100;
+

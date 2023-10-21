@@ -1,0 +1,8 @@
+@import '@/styles/global/zIndex';
+
+:root {
+  // breakpoint
+  @each $key, $value in $z-index-setting {
+      --z-index__#{$key}: #{$value};
+  }
+}

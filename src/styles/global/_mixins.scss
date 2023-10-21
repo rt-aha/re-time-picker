@@ -1,0 +1,141 @@
+@import './function';
+@function to-rem($fs: 16) {
+  @return calc(#{$fs}rem / 16);
+}
+@mixin rwd($breakpoint) {
+  @media screen and (min-width: bp($breakpoint)) {
+    @content;
+  }
+}
+@mixin font-style($c: #000, $fs: 16, $fw: 400, $ls: normal, $lh: normal) {
+  font-size: to-rem($fs);
+  font-weight: $fw;
+  line-height: $lh;
+  color: $c;
+  letter-spacing: $ls;
+}
+@mixin max-width($w, $isCenter: true) {
+  width: 100%;
+  max-width: $w + px;
+  @if $isCenter == true {
+    margin: 0 auto;
+  }
+}
+@mixin font-size($fs: 16) {
+  font-size: to-rem($fs);
+}
+@mixin padding($padding) {
+  box-sizing: border-box;
+  padding: $padding;
+}
+@mixin flex($js: flex-start, $ai: center, $fd: row) {
+  display: flex;
+  flex-direction: $fd;
+  align-items: $ai;
+  justify-content: $js;
+}
+@mixin inline-flex($js: flex-start, $ai: center, $fd: row) {
+  display: inline-flex;
+  flex-direction: $fd;
+  align-items: $ai;
+  justify-content: $js;
+}
+@mixin position($type: center, $tb: 0, $lr: 0) {
+  @if $type == center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  @if $type == tl {
+    position: absolute;
+    top: $tb;
+    left: $lr;
+  }
+  @if $type == tr {
+    position: absolute;
+    top: $tb;
+    right: $lr;
+  }
+  @if $type == bl {
+    position: absolute;
+    bottom: $tb;
+    left: $lr;
+  }
+  @if $type == br {
+    position: absolute;
+    bottom: $tb;
+    right: $lr;
+  }
+}
+@mixin cus-radius($tl, $tr, $br, $bl) {
+  border-radius: $tr $tl $br $bl;
+}
+@mixin circle($wh: 10px, $r: 50%) {
+  width: $wh;
+  height: $wh;
+  border-radius: $r;
+}
+
+// 行數省略
+@mixin word-ellipsis($row: 1, $break-all: "false") {
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $row;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+
+  @if ($break-all == "true") {
+    word-break: break-all;
+  }
+}
+
+
+// 行數復原
+@mixin word-ellipsis-unlimited() {
+  overflow: visible;
+  text-overflow: clip;
+  -webkit-line-clamp: none;
+  -webkit-box-orient: inline-axis;
+}
+
+// safari 不支持 flex: 1 簡寫
+@mixin flex1() {
+  flex: 1 1 0;
+}
+
+// 圖片銳利化
+@mixin optimizeImage() {
+  image-rendering: -o-crisp-edges;
+  image-rendering: optimize-contrast;
+  image-rendering: crisp-edges;
+  interpolation-mode: nearest-neighbor;
+}
+
+// 網格背景
+@mixin frameBg() {
+  background-image:
+    linear-gradient(f.color(g100), 1px, transparent 0),
+    linear-gradient(90deg, f.color(g100), 1px, transparent 0);
+  background-size: 20% 100%;
+}
+
+// 刪除 button 所有預設
+@mixin plain-btn() {
+  padding: 0;
+  cursor: pointer;
+  background-color: transparent;
+  border: 0 transparent;
+  outline: 0  transparent;
+}
+
+@mixin form-font() {
+  @include font-style($c-form-basic, 14, 400, 1px, 18px);
+}
+
+@mixin disabled() {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

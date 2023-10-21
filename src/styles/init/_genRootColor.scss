@@ -1,0 +1,30 @@
+@import '@/styles/global/color';
+
+
+// 加 `"" +`  的原因，vite 會報警告覺得，
+// 不該有顯式的顏色名稱在變數中 e.g. white, black, yellow 等等
+
+:root {
+  @each $info-key, $info-values in $default-color-setting {
+    $default-color: map-get($default-color-setting, $info-key);
+    
+    --color__#{"" + $info-key}: #{$default-color};
+  }
+}
+
+// :root {
+//   @each $theme-key, $color-values in $theme-colors {
+//     @each $info-key, $info-values in $default-color-setting {
+//       $default-color: map-get($default-color-setting, $info-key);
+//       $theme-color: map-get($color-values, $info-key);
+
+//       @if $theme-color {
+//         --color__#{$theme-key}__#{"" + $info-key}: #{$theme-color};
+//       } @else {
+//         --color__#{$theme-key}__#{"" + $info-key}: #{$default-color};
+//       }
+
+
+//     }
+//   }
+// }

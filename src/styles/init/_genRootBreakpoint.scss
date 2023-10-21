@@ -1,0 +1,11 @@
+@import '@/styles/global/breakpoint';
+
+:root {
+  // breakpoint
+  @each $bp-key, $bp-values in $breakpoint-setting {
+    @each $bp-info-key, $bp-info-values in $bp-key {
+      $bp-width: map-get($bp-values, breakpoint);
+      --breakpoint__#{$bp-key}: #{$bp-width};
+    }
+  }
+}

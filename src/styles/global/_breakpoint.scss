@@ -1,0 +1,50 @@
+// 有需要再開啟更細的斷點
+$breakpoint-setting: (
+  mobile: (
+    key: 'mobile',
+    breakpoint: 375px,
+    g-content-width: 335px,
+  ),
+
+  portrait: (
+    key: 'portrait',
+    breakpoint: 576px,
+    g-content-width: 520px,
+  ),
+
+  // sm-tablet: (
+  //   key: 'sm-tablet',
+  //   breakpoint: 768px,
+  //   g-content-width: 720px,
+  // ),
+
+  tablet: (
+    key: 'tablet',
+    breakpoint: 1024px,
+    g-content-width: 960px,
+  ),
+
+  // lg-tablet: (
+  //   key: 'tablet',
+  //   breakpoint: 1200px,
+  //   g-content-width: 1080px,
+  // ),
+
+  // sm-pc: (
+  //   key: 'sm-pc',
+  //   breakpoint: 1440px,
+  //   g-content-width: 1200px,
+  // ),
+
+  pc: (
+    key: 'pc',
+    breakpoint: 1600px,
+    g-content-width: 1440px,
+  ),
+
+  // lg-pc: (
+  //   key: 'lg-pc',
+  //   breakpoint: 1920px,
+  //   g-content-width: 1600px,
+  // ),
+);

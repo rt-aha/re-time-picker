@@ -1,0 +1,15 @@
+@import './breakpoint';
+@function c($varName) {
+  @return var(--color__#{$varName})
+};
+@function co($varName, $opacity: 20) {
+  @return var(--color__#{$varName}) + $opacity
+};
+@function bp($key) {
+  $curr-breakpoint-info: map-get($breakpoint-setting, $key);
+  $value: map-get($curr-breakpoint-info, 'breakpoint');
+  @return $value;
+}
+@function zi($varName) {
+  @return var(--z-index__#{$varName})
+};
