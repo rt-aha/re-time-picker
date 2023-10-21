@@ -79,6 +79,9 @@ devDependencies:
   vite-plugin-html:
     specifier: ^3.2.0
     version: 3.2.0(vite@4.5.0)
+  vite-plugin-libcss:
+    specifier: ^1.1.1
+    version: 1.1.1(vite@4.5.0)
   vitepress:
     specifier: 1.0.0-rc.20
     version: 1.0.0-rc.20(@algolia/client-search@4.20.0)(postcss@8.4.31)(sass@1.69.4)(search-insights@2.9.0)(terser@5.22.0)(typescript@5.2.2)
@@ -5043,6 +5046,15 @@ packages:
       html-minifier-terser: 6.1.0
       node-html-parser: 5.4.2
       pathe: 0.2.0
+      vite: 4.5.0(@types/node@20.8.7)(sass@1.69.4)(terser@5.22.0)
+    dev: true
+
+  /vite-plugin-libcss@1.1.1(vite@4.5.0):
+    resolution: {integrity: sha512-WAk6U9iYWMbcu7cdw4wACpVebZiLHMyyE9KTcBzzkTt1cnXj3a7loIoIGNblx+xMb9quPpO3iRbNTOnIFDzgmg==}
+    peerDependencies:
+      vite: '*'
+    dependencies:
+      minimatch: 9.0.3
       vite: 4.5.0(@types/node@20.8.7)(sass@1.69.4)(terser@5.22.0)
     dev: true
 

@@ -9,6 +9,7 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 import dayjs from 'dayjs';
 import { defineConfig, loadEnv } from 'vite';
 import dts from 'vite-plugin-dts';
+import libCss from 'vite-plugin-libcss';
 
 const loadJSON = path => JSON.parse(fs.readFileSync(new URL(path, import.meta.url)).toString());
 const packageJson = loadJSON('./package.json');
@@ -56,6 +57,7 @@ export default ({ mode }) => {
     plugins: [
       vue(),
       dts({ rollupTypes: true }),
+      libCss(),
       AutoImport({
         include: [
           /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx

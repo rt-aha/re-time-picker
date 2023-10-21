@@ -1,3 +1,4 @@
+import './style.css';
 import { getCurrentScope, onScopeDispose, unref, watch, defineComponent, computed, ref, openBlock, createElementBlock, normalizeClass, createElementVNode, toDisplayString, Fragment, renderList, createCommentVNode, normalizeStyle, nextTick, useSlots, renderSlot, createBlock, Transition, withCtx, withDirectives, vShow, createVNode, reactive, createSlots } from "vue";
 const _imports_0 = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik0xMiAyMGM0LjQgMCA4LTMuNiA4LThzLTMuNi04LTgtOHMtOCAzLjYtOCA4czMuNiA4IDggOG0wLTE4YzUuNSAwIDEwIDQuNSAxMCAxMHMtNC41IDEwLTEwIDEwUzIgMTcuNSAyIDEyUzYuNSAyIDEyIDJtNSA5LjVWMTNoLTZWN2gxLjV2NC41SDE3WiIvPjwvc3ZnPg==";
 function tryOnScopeDispose(fn) {
