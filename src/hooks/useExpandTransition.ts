@@ -1,3 +1,5 @@
+import type { Ref } from 'vue';
+
 interface UseExpandTransitionArgs {
   afterOpen?: Function
   afterClose?: Function

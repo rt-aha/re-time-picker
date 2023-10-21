@@ -106,7 +106,7 @@ export default ({ mode }) => {
       lib: {
         entry: './src/index.ts',
         name: 're-ui',
-        fileName: format => `re-ui.${format}.js`,
+        fileName: format => `index.${format}.js`,
       },
       rollupOptions: {
         external: ['vue'],
