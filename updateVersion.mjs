@@ -81,7 +81,7 @@ class Version {
   handleGitCommit(ver) {
     sh.exec('git add .');
     sh.exec(`git commit -m ":tada: ${ver} ${this.updateContent}"`);
-    sh.exec('git push');
+    sh.exec('update-version');
   }
 
   updateVersion(ver) {
