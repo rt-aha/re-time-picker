@@ -9,7 +9,6 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 import dayjs from 'dayjs';
 import { defineConfig, loadEnv } from 'vite';
 import dts from 'vite-plugin-dts';
-import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 
 const loadJSON = path => JSON.parse(fs.readFileSync(new URL(path, import.meta.url)).toString());
 const packageJson = loadJSON('./package.json');
@@ -57,7 +56,6 @@ export default ({ mode }) => {
     plugins: [
       vue(),
       dts({ rollupTypes: true }),
-      cssInjectedByJsPlugin(),
       AutoImport({
         include: [
           /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
