@@ -27,7 +27,7 @@ declare const _default: __VLS_WithTemplateSlots<DefineComponent<{
     };
     format: {
         type: StringConstructor;
-        default: string;
+        default: () => string;
     };
     disabled: {
         type: BooleanConstructor;
@@ -77,7 +77,7 @@ declare const _default: __VLS_WithTemplateSlots<DefineComponent<{
     };
     format: {
         type: StringConstructor;
-        default: string;
+        default: () => string;
     };
     disabled: {
         type: BooleanConstructor;

@@ -843,11 +843,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     },
     format: {
       type: String,
-      default: defaultFormat
-      // validator: (val: string) => {
-      //   const matchResult = val.match(validRegExp);
-      //   return !!matchResult;
-      // },
+      default: () => defaultFormat
     },
     disabled: {
       type: Boolean,
@@ -930,8 +926,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     });
     const formatDefaultCustomText = computed(() => {
       return {
-        ...props.customText,
-        ...defaultText
+        ...defaultText,
+        ...props.customText
       };
     });
     const afterOpen = () => {
@@ -1008,7 +1004,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         if (remainderApm === "") {
           return ["hms", ""];
         }
-        const { am, pm } = props.customText;
+        const { am, pm } = formatDefaultCustomText.value;
         const isExist = [am, pm].includes(remainderApm);
         if (isExist) {
           return ["hms", remainderApm];
@@ -1021,7 +1017,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         if (remainderApm === "") {
           return ["hm", ""];
         }
-        const { am, pm } = props.customText;
+        const { am, pm } = formatDefaultCustomText.value;
         const isExist = [am, pm].includes(remainderApm);
         if (isExist) {
           return ["hm", remainderApm];
@@ -1177,8 +1173,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const TimePicker_vue_vue_type_style_index_0_scoped_a67b60da_lang = "";
-const ReTimePicker = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-a67b60da"]]);
+const TimePicker_vue_vue_type_style_index_0_scoped_ccc04e02_lang = "";
+const ReTimePicker = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-ccc04e02"]]);
 export {
   ReTimePicker as default
 };
