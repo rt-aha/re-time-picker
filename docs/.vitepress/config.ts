@@ -2,13 +2,13 @@ import { defineConfig } from 'vitepress';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: 'Re Time Picker Doc',
+  title: 'Re Time Picker',
   description: 'A time-picker component base on vue 3 with typescript.',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' },
+      // { text: 'Examples', link: '/markdown-examples' },
     ],
 
     sidebar: [
@@ -16,7 +16,7 @@ export default defineConfig({
       {
         text: 'Introduction',
         items: [
-          { text: 'Getting Start', link: '/introduction/getting-start' },
+          { text: 'Getting Started', link: '/introduction/getting-started' },
         ],
       },
       {
@@ -24,31 +24,28 @@ export default defineConfig({
         items: [
           {
             text: 'Props',
-            link: '/props/index.md',
+            link: '/props/index',
           },
           {
             text: 'Slots',
-            link: '/slots/index.md',
+            link: '/slots/index',
           },
           {
             text: 'Events',
-            link: '/events/index.md',
+            link: '/events/index',
           },
         ],
       },
-
-      {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' },
-        ],
-      },
-
+      // {
+      //   text: 'Examples',
+      //   items: [
+      //     { text: 'Markdown Examples', link: '/markdown-examples' },
+      //     { text: 'Runtime API Examples', link: '/api-examples' },
+      //   ],
+      // },
     ],
-
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
+      { icon: 'github', link: 'https://github.com/rt-aha/re-time-picker' },
     ],
   },
 });

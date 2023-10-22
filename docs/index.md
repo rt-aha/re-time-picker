@@ -5,21 +5,14 @@ layout: home
 hero:
   name: "Re Time Picker"
   text: ""
-  tagline: My great project tagline
+  tagline: Easy import, easy use!
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Getting started
+      link: /introduction/getting-start
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Document
+      link: /props/index
 
-features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
 
