@@ -1,11 +1,11 @@
 <template>
   <div class="v-time-picker">
-    <TimPickerPage />
+    <TimePickerPage />
   </div>
 </template>
 
 <script setup lang="ts">
-import TimPickerPage from '@/dev/TimePicker.vue';
+import TimePickerPage from '@/dev/TimePicker.vue';
 </script>
 
 <style lang="scss" scoped>

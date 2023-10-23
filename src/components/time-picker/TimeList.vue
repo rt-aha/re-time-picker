@@ -16,7 +16,7 @@
       </div>
 
       <div class="time-range">
-        <span class="time-range__header">{{ customText.hour }}</span>
+        <span class="time-range__header">{{ customText.hour }} </span>
         <div ref="tlh" class="time-range__list" @scroll="() => setPositionDebounce('tlh')">
           <span v-for="(hour, index) of timeList.h" :key="hour + index" class="time-range__list__item">
             {{ hour }}
@@ -217,6 +217,7 @@ const calcScrollBarPosition = (tlType: TlRefKey) => {
 };
 
 const setPositionDebounce = debounce((tlType) => {
+  console.log('tlType', tlType);
   calcScrollBarPosition(tlType);
 }, 100);
 
@@ -254,9 +255,8 @@ $item-height: 30px;
   background-color: $c-white;
 
   &--show-header {
-    .time-list__col__item--header {
+    .time-range__header {
       display: inline-flex;
-
     }
   }
 }
@@ -267,94 +267,6 @@ $item-height: 30px;
   display: inline-flex;
   width: 100%;
   height: $item-height * 7;
-
-  &::before {
-    position: absolute;
-    top: $item-height * 3;
-    left: 50%;
-    width: 100%;
-    height: 1px;
-    content: "";
-    background-color: $c-form-assist;
-    transform: translateX(-50%);
-  }
-
-  &::after {
-    position: absolute;
-    top: $item-height * 4 - 1;
-    left: 50%;
-    width: 100%;
-    height: 1px;
-    content: "";
-    background-color: $c-form-assist;
-    transform: translateX(-50%);
-  }
-
-  &__col {
-    display: inline-block;
-    flex: 1;
-    height: 100%;
-    overflow-y: auto;
-    font-size: 0;
-    vertical-align: top;
-    position: relative;
-
-    &__item {
-      @include font-style($c-form-main, 14);
-      box-sizing: border-box;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: $item-height;
-      text-align: center;
-      // position: relative;
-      // backdrop-filter: blur(4px);
-      //   -webkit-backdrop-filter: blur(4px);
-
-      &--header {
-        // position: sticky;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 10;
-        background-color: rgba($c-form-assist2, 0.5);
-        @include font-style($c-main, 14, 700);
-        backdrop-filter: blur(2px);
-        display: none;
-
-        // -webkit-backdrop-filter: blur(4px);
-      }
-    }
-
-  }
-
-  // &--minute {
-  //   box-sizing: border-box;
-  //   width: $item-height * 2;
-
-  // }
-}
-
-.divider-line {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1px;
-  height: 100%;
-  background-color: $c-form-assist;
-
-  &--25 {
-    left: 25%;
-  }
-
-  &--50 {
-    left: 50%;
-  }
-
-  &--75 {
-    left: 75%;
-  }
 }
 
 .time-range {
@@ -372,7 +284,8 @@ $item-height: 30px;
     background-color: rgba($c-form-assist2, 0.5);
     @include font-style($c-main, 14, 700);
     backdrop-filter: blur(2px);
-    display: inline-flex;
+    display: none;
+    // display: inline-flex;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -400,6 +313,27 @@ $item-height: 30px;
       height: $item-height;
 
     }
+  }
+}
+
+.divider-line {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 100%;
+  background-color: $c-form-assist;
+
+  &--25 {
+    left: 25%;
+  }
+
+  &--50 {
+    left: 50%;
+  }
+
+  &--75 {
+    left: 75%;
   }
 }
 </style>

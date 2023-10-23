@@ -79,53 +79,36 @@ import FieldShell from '@/components/utils/FieldShell.vue';
 import FieldShellExpandTransition from '@/components/utils/FieldShellExpandTransition.vue';
 import useExapndTransition from '@/hooks/useExpandTransition';
 
-const props = defineProps({
-  modelValue: {
-    type: String,
-    default: '00:00:00',
-  },
-  format: {
-    type: String,
-    default: () => defaultFormat,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  placeholder: {
-    type: String,
-    default: '',
-  },
-  apmColumnPlacement: {
-    type: String as PropType<ApmColumnPlacement>,
-    default: 'last',
-  },
-  customText: {
-    type: Object as PropType<Partial<CustomText>>,
-    default: () => ({}),
-  },
-  showIcon: {
-    type: Boolean,
-    default: true,
-  },
-  showHeader: {
-    type: Boolean,
-    default: true,
-  },
-  hourRange: {
-    type: Array as PropType<CusTimeListRange>,
-    default: () => [],
-  },
-  minRange: {
-    type: Array as PropType<CusTimeListRange>,
-    default: () => [],
-  },
-  secRange: {
-    type: Array as PropType<CusTimeListRange>,
-    default: () => [],
-  },
+interface Props {
+  modelValue: string
+  format: string
+  disabled: boolean
+  placeholder: string
+  apmColumnPlacement: ApmColumnPlacement
+  customText: Partial<CustomText>
+  showIcon: boolean
+  showHeader: boolean
+  hourRange: CusTimeListRange
+  minRange: CusTimeListRange
+  secRange: CusTimeListRange
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  modelValue: '00:00:00',
+  format: () => defaultFormat,
+  disabled: false,
+  placeholder: '',
+  apmColumnPlacement: 'last',
+  customText: () => ({}),
+  showIcon: true,
+  showHeader: true,
+  hourRange: () => [],
+  minRange: () => [],
+  secRange: () => [],
 });
+
 const emit = defineEmits(['update:modelValue', 'open', 'close', 'change']);
+
 const slots = useSlots();
 const usedformat = ref(props.format);
 const isValidModelValue = ref(false);
