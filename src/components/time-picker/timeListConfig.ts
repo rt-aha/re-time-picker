@@ -16,6 +16,10 @@ export type TypeLabelKey = 'h' | 'm' | 's' | 'apm';
 export type TimeData = {
   [key in TypeLabelKey]: string
 };
+
+export type SetScrollTopStrategies = {
+  [key in TlRefKey]: Function
+};
 export interface TimeList {
   h: Array<string>
   m: Array<string>

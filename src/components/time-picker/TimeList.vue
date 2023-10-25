@@ -9,7 +9,10 @@
       <div v-if="isValidAType && apmColumnPlacement === 'first'" class="time-range">
         <span class="time-range__header">{{ customText.apm }}</span>
         <div ref="tlapm" class="time-range__list" @scroll="() => setPositionDebounce('tlapm')">
-          <span v-for="apmVal of timeList.apm" :key="apmVal" class="time-range__list__item">
+          <span
+            v-for="apmVal of timeList.apm" :key="apmVal" class="time-range__list__item"
+            @click="() => setScrollBarPosition('tlapm', apmVal)"
+          >
             {{ apmVal === '' ? apmVal : customText[apmVal] }}
           </span>
         </div>
@@ -18,7 +21,10 @@
       <div class="time-range">
         <span class="time-range__header">{{ customText.hour }} </span>
         <div ref="tlh" class="time-range__list" @scroll="() => setPositionDebounce('tlh')">
-          <span v-for="(hour, index) of timeList.h" :key="hour + index" class="time-range__list__item">
+          <span
+            v-for="(hour, index) of timeList.h" :key="hour + index" class="time-range__list__item"
+            @click="() => setScrollBarPosition('tlh', hour)"
+          >
             {{ hour }}
           </span>
         </div>
@@ -26,18 +32,22 @@
       <div class="time-range">
         <span class="time-range__header">{{ customText.min }}</span>
         <div ref="tlm" class="time-range__list" @scroll="() => setPositionDebounce('tlm')">
-          <span v-for="(hour, index) of timeList.m" :key="hour + index" class="time-range__list__item">
-            {{ hour }}
+          <span
+            v-for="(min, index) of timeList.m" :key="min + index" class="time-range__list__item"
+            @click="() => setScrollBarPosition('tlm', min)"
+          >
+            {{ min }}
           </span>
         </div>
       </div>
-      <div
-        v-if="formatType === 'HMS'" class="time-range"
-      >
+      <div v-if="formatType === 'HMS'" class="time-range">
         <span class="time-range__header">{{ customText.sec }}</span>
         <div ref="tls" class="time-range__list" @scroll="() => setPositionDebounce('tls')">
-          <span v-for="(hour, index) of timeList.s" :key="hour + index" class="time-range__list__item">
-            {{ hour }}
+          <span
+            v-for="(sec, index) of timeList.s" :key="sec + index" class="time-range__list__item"
+            @click="() => setScrollBarPosition('tls', sec)"
+          >
+            {{ sec }}
           </span>
         </div>
       </div>
@@ -45,7 +55,10 @@
       <div v-if="isValidAType && apmColumnPlacement === 'last'" class="time-range">
         <span class="time-range__header">{{ customText.apm }}</span>
         <div ref="tlapm" class="time-range__list" @scroll="() => setPositionDebounce('tlapm')">
-          <span v-for="apmVal of timeList.apm" :key="apmVal" class="time-range__list__item">
+          <span
+            v-for="apmVal of timeList.apm" :key="apmVal" class="time-range__list__item"
+            @click="() => setScrollBarPosition('tlapm', apmVal)"
+          >
             {{ apmVal ? customText[apmVal] : apmVal }}
           </span>
         </div>
@@ -69,6 +82,7 @@ import type {
   CustomText,
   FormatType,
   HMode,
+  SetScrollTopStrategies,
   TimeData,
   TimeList,
   TlRefKey,
@@ -104,13 +118,6 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits(['updateTime']);
 
-// const formatCustomText = computed<CustomText>(() => {
-//   return {
-//     ...props.customText,
-//     ...defaultText,
-//   };
-// });
-
 const dividerLineConfig = computed(() => {
   if (props.isValidAType && props.formatType === 'HMS') {
     return ['25', '50', '75'];
@@ -125,10 +132,6 @@ const dividerLineConfig = computed(() => {
 
 const SCROLL_OFFSET = 30;
 const ADJUST_OFFSET = 3;
-// const adjustOffset = computed(() => {
-//   // return props.showHeader ? 2 : 3;
-//   return 3;
-// });
 
 const tlh = ref();
 const tlm = ref();
@@ -136,7 +139,6 @@ const tls = ref();
 const tlapm = ref();
 
 const timeList = computed<TimeList>(() => ({
-  // h: genTimeList('h', { hourInterval: 5, hourRange: [0, 1, 2, 3, [4, 6], 10, 11, 12, 13, 14, 15, 16, 17, 18] }),
   h: genTimeList('h', props.hourRange, props.hMode, props.showHeader, { isValidAType: props.isValidAType }),
   m: genTimeList('m', props.minRange, props.hMode, props.showHeader, {}),
   s: genTimeList('s', props.secRange, props.hMode, props.showHeader, {}),
@@ -144,7 +146,6 @@ const timeList = computed<TimeList>(() => ({
 }));
 
 const apmLabel = computed<ApmCustomText>(() => ({
-  // am: 'am',
   am: props.customText.am,
   pm: props.customText.pm,
 }));
@@ -155,17 +156,12 @@ const updateTimeLabel = (calcType: TlRefKey, targetPosition: number) => {
   const newValue = timeList.value[changeType][scrollOffsetUnit + ADJUST_OFFSET];
   const { h, m, s, apm } = props.timeData;
 
-  // console.log('%cnewValue -->', 'color: #059669; background-color: #D1FAE5', newValue);
-  // console.log('%ch, m, s, apm -->', 'color: #059669; background-color: #D1FAE5', h, m, s, apm);
-
   const tempTimeLabel: TimeData = {
     h: changeType === 'h' ? newValue : h,
     m: changeType === 'm' ? newValue : m,
     s: changeType === 's' ? newValue : s,
     apm: changeType === 'apm' ? apmLabel.value[(newValue as ApmCustomTextUnion)] : apm,
   };
-
-  // console.log('tempTimeLabel', tempTimeLabel);
 
   emit('updateTime', tempTimeLabel);
 };
@@ -223,52 +219,58 @@ const calcScrollBarPosition = (tlType: TlRefKey) => {
 };
 
 const setPositionDebounce = debounce((tlType) => {
-  // console.log('%cDate.now() -->', 'color: #059669; background-color: #D1FAE5', Date.now());
   calcScrollBarPosition(tlType);
 }, 100);
 
-// const setPositionDebounce = (tlType: TlRefKey) => {
-//   let timer: any = null;
-//   const genTimer = () => {
-//     timer = setTimeout(() => {
-//       calcScrollBarPosition(tlType);
-//       clearTimeout(timer);
-//     }, 500);
-//   };
+const setScrollBarPosition = async (tlType: TlRefKey, compareVal: string) => {
+  await nextTick();
 
-//   genTimer();
-// };
+  const setScrollTopStrategies: SetScrollTopStrategies = {
+    tlh() {
+      const idx = timeList.value.h.findIndex(item => item === compareVal) - ADJUST_OFFSET;
+      setTlScrollTop(tlType, (idx > 0 ? idx : 0) * SCROLL_OFFSET);
+    },
+    tlm() {
+      const idx = timeList.value.m.findIndex(item => item === compareVal) - ADJUST_OFFSET;
+      setTlScrollTop(tlType, (idx > 0 ? idx : 0) * SCROLL_OFFSET);
+    },
+    tls() {
+      const idx = timeList.value.s.findIndex(item => item === compareVal) - ADJUST_OFFSET;
+      setTlScrollTop(tlType, (idx > 0 ? idx : 0) * SCROLL_OFFSET);
+    },
+    tlapm() {
+      const idx = timeList.value.apm.findIndex((item: ApmCustomTextUnion | '') => {
+        if (item === '') {
+          return false;
+        }
+        return props.customText[item] === props.timeData.apm;
+      }) - ADJUST_OFFSET;
 
-const setScrollBarPosition = async () => {
+      setTlScrollTop(tlType, (idx > 0 ? idx : 0) * SCROLL_OFFSET);
+    },
+  };
+
+  setScrollTopStrategies[tlType]();
+};
+
+const setAllScrollBarPosition = () => {
   if (!props.isValidModelValue) {
     return;
   }
 
-  await nextTick();
-
-  const hIdx = timeList.value.h.findIndex(item => item === props.timeData.h) - ADJUST_OFFSET;
-  const mIdx = timeList.value.m.findIndex(item => item === props.timeData.m) - ADJUST_OFFSET;
-  const sIdx = timeList.value.s.findIndex(item => item === props.timeData.s) - ADJUST_OFFSET;
-  const apmIdx = timeList.value.apm.findIndex((item: ApmCustomTextUnion | '') => {
-    if (item === '') {
-      return false;
-    }
-    return props.customText[item] === props.timeData.apm;
-  }) - ADJUST_OFFSET;
-
-  setTlScrollTop('tlh', (hIdx > 0 ? hIdx : 0) * SCROLL_OFFSET);
-  setTlScrollTop('tlm', (mIdx > 0 ? mIdx : 0) * SCROLL_OFFSET);
-  setTlScrollTop('tls', (sIdx > 0 ? sIdx : 0) * SCROLL_OFFSET);
-  setTlScrollTop('tlapm', (apmIdx > 0 ? apmIdx : 0) * SCROLL_OFFSET);
+  setScrollBarPosition('tlh', props.timeData.h);
+  setScrollBarPosition('tlm', props.timeData.m);
+  setScrollBarPosition('tls', props.timeData.s);
+  setScrollBarPosition('tlapm', props.timeData.apm);
 };
 
 watch(() => [props.show, props.isValidModelValue, props.timeString], (newVal) => {
   if (newVal[0] && newVal[1]) {
-    setScrollBarPosition();
+    setAllScrollBarPosition();
   }
 });
 
-setScrollBarPosition();
+setAllScrollBarPosition();
 </script>
 
 <style lang="scss" scoped>
@@ -349,6 +351,17 @@ $item-height: 30px;
     position: relative;
     text-align: center;
 
+    &::-webkit-scrollbar {
+      width: 4px;
+      height: 8px;
+      // background-color: $c-white
+    }
+
+    // &::-webkit-scrollbar-thumb {
+    //   border-radius: 4px;
+    //   background: $c-form-main;
+    // }
+
     &__item {
       @include font-style($c-form-main, 14);
       box-sizing: border-box;
@@ -357,7 +370,7 @@ $item-height: 30px;
       justify-content: center;
       width: 100%;
       height: $item-height;
-
+      cursor: pointer;
     }
   }
 }
