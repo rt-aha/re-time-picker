@@ -2,9 +2,8 @@
   <div class="v-time-picker">
     <ReTimePicker
       v-model="val1"
-      format="A HH:mm:ss"
+      format="HH:mm:ss A"
       :show-header="true"
-      apm-column-placement="first"
       :custom-text="customText"
       :hour-range="[13, 11, 12, 0, 1, 2, [4, 10], 13]"
       @close="onClose"
@@ -17,15 +16,15 @@
 <script setup lang="ts">
 import { ReTimePicker } from '@/components/time-picker';
 
-const val1 = ref('10:10:12 上午');
+const val1 = ref('10:10:12 AM');
 
 setTimeout(() => {
-  val1.value = '14:09:32 上午';
+  val1.value = '13:09:32 PM';
 }, 1000);
 
 const customText = {
-  am: '上午',
-  pm: '下午',
+  am: 'AM',
+  pm: 'PM',
 };
 
 const onClose = () => {
@@ -43,4 +42,3 @@ const onChange = () => {
 
 <style lang="scss" scoped>
 </style>
-@/components/time-picker
