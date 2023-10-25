@@ -25,7 +25,7 @@ interface Props {
 
 withDefaults(defineProps<Props>(), {
   disabled: false,
-  placeholder: 'placeholder ...',
+  placeholder: 'placeholder',
 });
 
 const slots = useSlots();
@@ -33,17 +33,23 @@ const slots = useSlots();
 
 <style lang="scss">
 // @import '@/styles/global/index.scss';
-
 .re-field-shell {
   @include padding(0);
   @include flex();
   width: 100%;
   height: 100%;
   min-height: 36px;
-  border: 1px solid var(--rtp-c-field-border);
+  border-style: solid;
+  border-width: var(--rtp-bw-field);
+  border-color: var(--rtp-c-field-border);
   border-radius: var(--rtp-br-field);
   background-color: var(--rtp-c-field-bg);
   cursor: pointer;
+  transition: .4s;
+
+  &:hover {
+    border-color: var(--rtp-c-field-border--hover);
+  }
 
   &--disabled {
     cursor: not-allowed;
