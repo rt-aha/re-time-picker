@@ -124,10 +124,11 @@ const dividerLineConfig = computed(() => {
 });
 
 const SCROLL_OFFSET = 30;
-const adjustOffset = computed(() => {
-  // return props.showHeader ? 2 : 3;
-  return 3;
-});
+const ADJUST_OFFSET = 3;
+// const adjustOffset = computed(() => {
+//   // return props.showHeader ? 2 : 3;
+//   return 3;
+// });
 
 const tlh = ref();
 const tlm = ref();
@@ -151,8 +152,11 @@ const apmLabel = computed<ApmCustomText>(() => ({
 const updateTimeLabel = (calcType: TlRefKey, targetPosition: number) => {
   const changeType = calcType.replace('tl', '') as TypeLabelKey;
   const scrollOffsetUnit = targetPosition / SCROLL_OFFSET;
-  const newValue = timeList.value[changeType][scrollOffsetUnit + adjustOffset.value];
+  const newValue = timeList.value[changeType][scrollOffsetUnit + ADJUST_OFFSET];
   const { h, m, s, apm } = props.timeData;
+
+  console.log('%cnewValue -->', 'color: #059669; background-color: #D1FAE5', newValue);
+  console.log('%ch, m, s, apm -->', 'color: #059669; background-color: #D1FAE5', h, m, s, apm);
 
   const tempTimeLabel: TimeData = {
     h: changeType === 'h' ? newValue : h,
@@ -160,6 +164,8 @@ const updateTimeLabel = (calcType: TlRefKey, targetPosition: number) => {
     s: changeType === 's' ? newValue : s,
     apm: changeType === 'apm' ? apmLabel.value[(newValue as ApmCustomTextUnion)] : apm,
   };
+
+  console.log('tempTimeLabel', tempTimeLabel);
 
   emit('updateTime', tempTimeLabel);
 };
@@ -217,9 +223,21 @@ const calcScrollBarPosition = (tlType: TlRefKey) => {
 };
 
 const setPositionDebounce = debounce((tlType) => {
-  console.log('tlType', tlType);
+  console.log('%cDate.now() -->', 'color: #059669; background-color: #D1FAE5', Date.now());
   calcScrollBarPosition(tlType);
 }, 100);
+
+// const setPositionDebounce = (tlType: TlRefKey) => {
+//   let timer: any = null;
+//   const genTimer = () => {
+//     timer = setTimeout(() => {
+//       calcScrollBarPosition(tlType);
+//       clearTimeout(timer);
+//     }, 500);
+//   };
+
+//   genTimer();
+// };
 
 const setScrollBarPosition = async () => {
   if (!props.isValidModelValue) {
@@ -228,15 +246,20 @@ const setScrollBarPosition = async () => {
 
   await nextTick();
 
-  const hIdx = timeList.value.h.findIndex(item => item === props.timeData.h) - adjustOffset.value;
-  const mIdx = timeList.value.m.findIndex(item => item === props.timeData.m) - adjustOffset.value;
-  const sIdx = timeList.value.s.findIndex(item => item === props.timeData.s) - adjustOffset.value;
-  const apmIdx = timeList.value.apm.findIndex(item => item === props.timeData.apm) - adjustOffset.value;
+  const hIdx = timeList.value.h.findIndex(item => item === props.timeData.h) - ADJUST_OFFSET;
+  const mIdx = timeList.value.m.findIndex(item => item === props.timeData.m) - ADJUST_OFFSET;
+  const sIdx = timeList.value.s.findIndex(item => item === props.timeData.s) - ADJUST_OFFSET;
+  const apmIdx = timeList.value.apm.findIndex(item => item === props.timeData.apm) - ADJUST_OFFSET;
 
-  setTlScrollTop('tlh', hIdx * SCROLL_OFFSET);
-  setTlScrollTop('tlm', mIdx * SCROLL_OFFSET);
-  setTlScrollTop('tls', sIdx * SCROLL_OFFSET);
-  setTlScrollTop('tlapm', apmIdx * SCROLL_OFFSET);
+  console.log('hIdx', hIdx);
+  console.log('mIdx', mIdx);
+  console.log('sIdx', sIdx);
+  console.log('apmIdx', apmIdx);
+
+  setTlScrollTop('tlh', (hIdx > 0 ? hIdx : 0) * SCROLL_OFFSET);
+  setTlScrollTop('tlm', (mIdx > 0 ? mIdx : 0) * SCROLL_OFFSET);
+  setTlScrollTop('tls', (sIdx > 0 ? sIdx : 0) * SCROLL_OFFSET);
+  setTlScrollTop('tlapm', (apmIdx > 0 ? apmIdx : 0) * SCROLL_OFFSET);
 };
 
 watch(() => [props.show, props.isValidModelValue, props.timeString], (newVal) => {
@@ -267,6 +290,29 @@ $item-height: 30px;
   display: inline-flex;
   width: 100%;
   height: $item-height * 7;
+
+  &::before {
+    position: absolute;
+    top: $item-height * 3;
+    left: 50%;
+    width: 100%;
+    height: 1px;
+    content: "";
+    background-color: $c-form-assist;
+    transform: translateX(-50%);
+  }
+
+  &::after {
+    position: absolute;
+    top: $item-height * 4 - 1;
+    left: 50%;
+    width: 100%;
+    height: 1px;
+    content: "";
+    background-color: $c-form-assist;
+    transform: translateX(-50%);
+  }
+
 }
 
 .time-range {

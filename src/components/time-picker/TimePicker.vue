@@ -81,16 +81,16 @@ import useExapndTransition from '@/hooks/useExpandTransition';
 
 interface Props {
   modelValue: string
-  format: string
-  disabled: boolean
-  placeholder: string
-  apmColumnPlacement: ApmColumnPlacement
-  customText: Partial<CustomText>
-  showIcon: boolean
-  showHeader: boolean
-  hourRange: CusTimeListRange
-  minRange: CusTimeListRange
-  secRange: CusTimeListRange
+  format?: string
+  disabled?: boolean
+  placeholder?: string
+  apmColumnPlacement?: ApmColumnPlacement
+  customText?: Partial<CustomText>
+  showIcon?: boolean
+  showHeader?: boolean
+  hourRange?: CusTimeListRange
+  minRange?: CusTimeListRange
+  secRange?: CusTimeListRange
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -251,6 +251,7 @@ const updateValueToMatchFormat = (type: ValueMatchFormatType, apm = ''): TimeDat
 
 const checkModelValue: () => [ValueMatchFormatType | null, string] = () => {
   const isHmsValid = validHmsRegExp.test(props.modelValue);
+
   if (isHmsValid) {
     let remainderApm = props.modelValue.replace(validHmsRegExp, '');
     remainderApm = remainderApm.replace(/\s/g, '');
@@ -267,6 +268,7 @@ const checkModelValue: () => [ValueMatchFormatType | null, string] = () => {
   }
 
   const isHmValid = validHmRegExp.test(props.modelValue);
+
   if (isHmValid) {
     let remainderApm = props.modelValue.replace(validHmRegExp, '');
     remainderApm = remainderApm.replace(/\s/g, '');
@@ -277,6 +279,7 @@ const checkModelValue: () => [ValueMatchFormatType | null, string] = () => {
 
     const { am, pm } = formatDefaultCustomText.value;
     const isExist = [am, pm].includes(remainderApm);
+
     if (isExist) {
       return ['hm', remainderApm];
     }
@@ -349,6 +352,7 @@ const genTimeDataAndString = (val: TimeData) => {
 
 const validModelValueAndFormat = () => {
   isValidModelValue.value = false;
+
   const isValidFormat = checkFormat();
   const [hmsType, apmVal] = checkModelValue();
 
@@ -366,6 +370,7 @@ const validModelValueAndFormat = () => {
 };
 
 const updateTime = async (val: TimeData) => {
+  // console.log('%cval -->', 'color: #059669; background-color: #D1FAE5', val);
   genTimeDataAndString(val);
 
   emit('update:modelValue', timeString.value);
@@ -377,7 +382,7 @@ const updateTime = async (val: TimeData) => {
 validModelValueAndFormat();
 
 watch(() => props.modelValue, () => {
-  validModelValueAndFormat();
+  // validModelValueAndFormat();
 });
 onClickOutside(reTimePickerRef, () => handleExpandStatus(false));
 </script>
