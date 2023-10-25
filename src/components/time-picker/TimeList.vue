@@ -146,7 +146,7 @@ const timeList = computed<TimeList>(() => ({
 const apmLabel = computed<ApmCustomText>(() => ({
   // am: 'am',
   am: props.customText.am,
-  pm: 'pm',
+  pm: props.customText.pm,
 }));
 
 const updateTimeLabel = (calcType: TlRefKey, targetPosition: number) => {
@@ -155,8 +155,8 @@ const updateTimeLabel = (calcType: TlRefKey, targetPosition: number) => {
   const newValue = timeList.value[changeType][scrollOffsetUnit + ADJUST_OFFSET];
   const { h, m, s, apm } = props.timeData;
 
-  console.log('%cnewValue -->', 'color: #059669; background-color: #D1FAE5', newValue);
-  console.log('%ch, m, s, apm -->', 'color: #059669; background-color: #D1FAE5', h, m, s, apm);
+  // console.log('%cnewValue -->', 'color: #059669; background-color: #D1FAE5', newValue);
+  // console.log('%ch, m, s, apm -->', 'color: #059669; background-color: #D1FAE5', h, m, s, apm);
 
   const tempTimeLabel: TimeData = {
     h: changeType === 'h' ? newValue : h,
@@ -165,7 +165,7 @@ const updateTimeLabel = (calcType: TlRefKey, targetPosition: number) => {
     apm: changeType === 'apm' ? apmLabel.value[(newValue as ApmCustomTextUnion)] : apm,
   };
 
-  console.log('tempTimeLabel', tempTimeLabel);
+  // console.log('tempTimeLabel', tempTimeLabel);
 
   emit('updateTime', tempTimeLabel);
 };
@@ -223,7 +223,7 @@ const calcScrollBarPosition = (tlType: TlRefKey) => {
 };
 
 const setPositionDebounce = debounce((tlType) => {
-  console.log('%cDate.now() -->', 'color: #059669; background-color: #D1FAE5', Date.now());
+  // console.log('%cDate.now() -->', 'color: #059669; background-color: #D1FAE5', Date.now());
   calcScrollBarPosition(tlType);
 }, 100);
 
@@ -249,12 +249,12 @@ const setScrollBarPosition = async () => {
   const hIdx = timeList.value.h.findIndex(item => item === props.timeData.h) - ADJUST_OFFSET;
   const mIdx = timeList.value.m.findIndex(item => item === props.timeData.m) - ADJUST_OFFSET;
   const sIdx = timeList.value.s.findIndex(item => item === props.timeData.s) - ADJUST_OFFSET;
-  const apmIdx = timeList.value.apm.findIndex(item => item === props.timeData.apm) - ADJUST_OFFSET;
-
-  console.log('hIdx', hIdx);
-  console.log('mIdx', mIdx);
-  console.log('sIdx', sIdx);
-  console.log('apmIdx', apmIdx);
+  const apmIdx = timeList.value.apm.findIndex((item: ApmCustomTextUnion | '') => {
+    if (item === '') {
+      return false;
+    }
+    return props.customText[item] === props.timeData.apm;
+  }) - ADJUST_OFFSET;
 
   setTlScrollTop('tlh', (hIdx > 0 ? hIdx : 0) * SCROLL_OFFSET);
   setTlScrollTop('tlm', (mIdx > 0 ? mIdx : 0) * SCROLL_OFFSET);
