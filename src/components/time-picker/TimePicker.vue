@@ -51,6 +51,7 @@
 </template>
 
 <script setup lang="ts">
+import '@/styles/global/_color.scss';
 import { onClickOutside } from '@vueuse/core';
 import ReTimeList from './TimeList.vue';
 import {
