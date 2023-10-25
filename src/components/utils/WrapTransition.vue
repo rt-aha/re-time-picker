@@ -25,9 +25,9 @@ withDefaults(defineProps<Props>(), {
 <style lang="scss">
 .re-collapse-transition {
   overflow: hidden;
-  border-radius: var(--rtp-dropdown-border-radius);
-  border: 1px solid var(--rtp-dropdown-border-color);
-  background-color: var(--rtp-dropdown-bg-color);
+  border-radius: var(--rtp-br-dropdown);
+  border: 1px solid var(--rtp-c-dropdown-border);
+  background-color: var(--rtp-c-dropdown-bg);
 }
 
 .v-enter-active,

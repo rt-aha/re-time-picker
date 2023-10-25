@@ -1,45 +1,45 @@
 :root {
   // shared
-  --rtp-main: #1a237e;
-  --rtp-black: #000000;
-  --rtp-white: #ffffff;
-  --rtp-assist: #cccccc;
-  --rtp-border-radius: 4px;
+  --rtp-c-c-main: #1a237e;
+  --rtp-c-black: #000000;
+  --rtp-c-white: #ffffff;
+  --rtp-c-assist: #cccccc;
+  --rtp-br: 4px;
   // specific - color
-  --rtp-header-bg: #cccccc50;
-  --rtp-header-text: var(--rtp-main);
-  --rtp-field-value: var(--rtp-black);
-  --rtp-field-bg: var(--rtp-white);
-  --rtp-field-border-color: var(--rtp-assist);
-  --rtp-dropdown-border-color: var(--rtp-assist);
-  --rtp-dropdown-bg-color: var(--rtp-white);
-  --rtp-value-line: var(--rtp-assist);
-  --rtp-range-item: var(--rtp-black);
-  --rtp-divide-line: var(--rtp-assist);
+  --rtp-c-header-bg: #cccccc50;
+  --rtp-c-header-text: var(--rtp-c-c-main);
+  --rtp-c-field-value: var(--rtp-c-black);
+  --rtp-c-field-bg: var(--rtp-c-white);
+  --rtp-c-field-border: var(--rtp-c-assist);
+  --rtp-c-dropdown-border: var(--rtp-c-assist);
+  --rtp-c-dropdown-bg: var(--rtp-c-white);
+  --rtp-c-value-line: var(--rtp-c-assist);
+  --rtp-c-range-item: var(--rtp-c-black);
+  --rtp-c-divide-line: var(--rtp-c-assist);
   // specific - radius
-  --rtp-field-border-radius: var(--rtp-border-radius);
-  --rtp-dropdown-border-radius: var(--rtp-border-radius);
+  --rtp-br-field: var(--rtp-br);
+  --rtp-br-dropdown: var(--rtp-br);
 }
 
 // :root {
 //   // shared
-//   --rtp-main: #ff0000;
-//   --rtp-black: #00ff00;
-//   --rtp-white: #0000ff;
-//   --rtp-assist: #aa0000;
-//   --rtp-border-radius: 10px;
+//   --rtp-c-c-main: #ff0000;
+//   --rtp-c-black: #00ff00;
+//   --rtp-c-white: #0000ff;
+//   --rtp-c-assist: #aa0000;
+//   --rtp-br: 10px;
 //   // specific - color
-//   --rtp-header-bg: #cccccc50;
-//   --rtp-header-text: var(--rtp-main);
-//   --rtp-field-value: var(--rtp-black);
-//   --rtp-field-bg: var(--rtp-white);
-//   --rtp-field-border-color: var(--rtp-assist);
-//   --rtp-dropdown-border-color: var(--rtp-assist);
-//   --rtp-dropdown-bg-color: var(--rtp-white);
-//   --rtp-value-line: var(--rtp-assist);
-//   --rtp-range-item: var(--rtp-black);
-//   --rtp-divide-line: var(--rtp-assist);
+//   --rtp-c-header-bg: #cccccc50;
+//   --rtp-c-header-text: var(--rtp-c-c-main);
+//   --rtp-c-field-value: var(--rtp-c-black);
+//   --rtp-c-field-bg: var(--rtp-c-white);
+//   --rtp-c-field-border: var(--rtp-c-assist);
+//   --rtp-c-dropdown-border: var(--rtp-c-assist);
+//   --rtp-c-dropdown-bg: var(--rtp-c-white);
+//   --rtp-c-value-line: var(--rtp-c-assist);
+//   --rtp-c-range-item: var(--rtp-c-black);
+//   --rtp-c-divide-line: var(--rtp-c-assist);
 //   // specific - radius
-//   --rtp-field-border-radius: var(--rtp-border-radius);
-//   --rtp-dropdown-border-radius: var(--rtp-border-radius);
+//   --rtp-br-field: var(--rtp-br);
+//   --rtp-br-dropdown: var(--rtp-br);
 // }

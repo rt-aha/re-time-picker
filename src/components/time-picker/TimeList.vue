@@ -299,7 +299,7 @@ $item-height: 30px;
     width: 100%;
     height: 1px;
     content: "";
-    background-color: var(--rtp-value-line);
+    background-color: var(--rtp-c-value-line);
     transform: translateX(-50%);
   }
 
@@ -310,7 +310,7 @@ $item-height: 30px;
     width: 100%;
     height: 1px;
     content: "";
-    background-color: var(--rtp-value-line);
+    background-color: var(--rtp-c-value-line);
     transform: translateX(-50%);
   }
 
@@ -328,8 +328,8 @@ $item-height: 30px;
     top: 0;
     left: 0;
     z-index: 10;
-    background-color: var(--rtp-header-bg);
-    @include font-style(var(--rtp-header-text), 14, 700);
+    background-color: var(--rtp-c-header-bg);
+    @include font-style(var(--rtp-c-header-text), 14, 700);
     backdrop-filter: blur(2px);
     display: none;
     justify-content: center;
@@ -356,7 +356,7 @@ $item-height: 30px;
     }
 
     &__item {
-      @include font-style(var(--rtp-range-item), 14);
+      @include font-style(var(--rtp-c-range-item), 14);
       box-sizing: border-box;
       display: inline-flex;
       align-items: center;
@@ -374,7 +374,7 @@ $item-height: 30px;
   transform: translateY(-50%);
   width: 1px;
   height: 100%;
-  background-color: var(--rtp-divide-line);
+  background-color: var(--rtp-c-divide-line);
 
   &--25 {
     left: 25%;

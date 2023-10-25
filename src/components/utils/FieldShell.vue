@@ -40,9 +40,9 @@ const slots = useSlots();
   width: 100%;
   height: 100%;
   min-height: 36px;
-  border: 1px solid var(--rtp-field-border-color);
-  border-radius: var(--rtp-field-border-radius);
-  background-color: var(--rtp-field-bg);
+  border: 1px solid var(--rtp-c-field-border);
+  border-radius: var(--rtp-br-field);
+  background-color: var(--rtp-c-field-bg);
   cursor: pointer;
 
   &--disabled {
@@ -57,7 +57,7 @@ const slots = useSlots();
 
     &__prefix {
       @include padding(0 0 0 8px);
-      @include font-style(var(--rtp-field-value), 14, 400);
+      @include font-style(var(--rtp-c-field-value), 14, 400);
       @include flex(center);
       flex: none;
       width: auto;
@@ -72,7 +72,7 @@ const slots = useSlots();
 
     &__suffix {
       @include padding(0 8px 0 0);
-      @include font-style(var(--rtp-field-value), 14, 400);
+      @include font-style(var(--rtp-c-field-value), 14, 400);
       @include flex(center);
       flex: none;
       width: auto;
