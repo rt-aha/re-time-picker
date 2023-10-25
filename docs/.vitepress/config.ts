@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress';
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   outDir: '../public',
-  base: '/re-time-picker',
+  base: '/re-time-picker/',
   title: 'Re Time Picker',
   description: 'A time-picker component base on vue 3 with typescript.',
   themeConfig: {
