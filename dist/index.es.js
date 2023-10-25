@@ -443,6 +443,7 @@ const _hoisted_10 = {
 };
 const _hoisted_11 = { class: "time-range__header" };
 const SCROLL_OFFSET = 30;
+const ADJUST_OFFSET = 3;
 const _sfc_main$4 = /* @__PURE__ */ defineComponent({
   __name: "TimeList",
   props: {
@@ -473,9 +474,6 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
       }
       return ["33.333333", "66.666667"];
     });
-    const adjustOffset = computed(() => {
-      return 3;
-    });
     const tlh = ref();
     const tlm = ref();
     const tls = ref();
@@ -490,12 +488,12 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
     const apmLabel = computed(() => ({
       // am: 'am',
       am: props.customText.am,
-      pm: "pm"
+      pm: props.customText.pm
     }));
     const updateTimeLabel = (calcType, targetPosition) => {
       const changeType = calcType.replace("tl", "");
       const scrollOffsetUnit = targetPosition / SCROLL_OFFSET;
-      const newValue = timeList.value[changeType][scrollOffsetUnit + adjustOffset.value];
+      const newValue = timeList.value[changeType][scrollOffsetUnit + ADJUST_OFFSET];
       const { h, m, s, apm: apm2 } = props.timeData;
       const tempTimeLabel = {
         h: changeType === "h" ? newValue : h,
@@ -556,14 +554,19 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
         return;
       }
       await nextTick();
-      const hIdx = timeList.value.h.findIndex((item) => item === props.timeData.h) - adjustOffset.value;
-      const mIdx = timeList.value.m.findIndex((item) => item === props.timeData.m) - adjustOffset.value;
-      const sIdx = timeList.value.s.findIndex((item) => item === props.timeData.s) - adjustOffset.value;
-      const apmIdx = timeList.value.apm.findIndex((item) => item === props.timeData.apm) - adjustOffset.value;
-      setTlScrollTop("tlh", hIdx * SCROLL_OFFSET);
-      setTlScrollTop("tlm", mIdx * SCROLL_OFFSET);
-      setTlScrollTop("tls", sIdx * SCROLL_OFFSET);
-      setTlScrollTop("tlapm", apmIdx * SCROLL_OFFSET);
+      const hIdx = timeList.value.h.findIndex((item) => item === props.timeData.h) - ADJUST_OFFSET;
+      const mIdx = timeList.value.m.findIndex((item) => item === props.timeData.m) - ADJUST_OFFSET;
+      const sIdx = timeList.value.s.findIndex((item) => item === props.timeData.s) - ADJUST_OFFSET;
+      const apmIdx = timeList.value.apm.findIndex((item) => {
+        if (item === "") {
+          return false;
+        }
+        return props.customText[item] === props.timeData.apm;
+      }) - ADJUST_OFFSET;
+      setTlScrollTop("tlh", (hIdx > 0 ? hIdx : 0) * SCROLL_OFFSET);
+      setTlScrollTop("tlm", (mIdx > 0 ? mIdx : 0) * SCROLL_OFFSET);
+      setTlScrollTop("tls", (sIdx > 0 ? sIdx : 0) * SCROLL_OFFSET);
+      setTlScrollTop("tlapm", (apmIdx > 0 ? apmIdx : 0) * SCROLL_OFFSET);
     };
     watch(() => [props.show, props.isValidModelValue, props.timeString], (newVal) => {
       if (newVal[0] && newVal[1]) {
@@ -670,7 +673,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const TimeList_vue_vue_type_style_index_0_scoped_e834948c_lang = "";
+const TimeList_vue_vue_type_style_index_0_scoped_bbb19562_lang = "";
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
   for (const [key, val] of props) {
@@ -678,7 +681,7 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const ReTimeList = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-e834948c"]]);
+const ReTimeList = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-bbb19562"]]);
 const _hoisted_1$2 = { class: "re-field-shell__content" };
 const _hoisted_2 = {
   key: 0,
@@ -837,50 +840,17 @@ const _hoisted_1 = ["value", "placeholder"];
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "TimePicker",
   props: {
-    modelValue: {
-      type: String,
-      default: "00:00:00"
-    },
-    format: {
-      type: String,
-      default: () => defaultFormat
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    placeholder: {
-      type: String,
-      default: ""
-    },
-    apmColumnPlacement: {
-      type: String,
-      default: "last"
-    },
-    customText: {
-      type: Object,
-      default: () => ({})
-    },
-    showIcon: {
-      type: Boolean,
-      default: true
-    },
-    showHeader: {
-      type: Boolean,
-      default: true
-    },
-    hourRange: {
-      type: Array,
-      default: () => []
-    },
-    minRange: {
-      type: Array,
-      default: () => []
-    },
-    secRange: {
-      type: Array,
-      default: () => []
-    }
+    modelValue: { default: "00:00:00" },
+    format: { default: () => defaultFormat },
+    disabled: { type: Boolean, default: false },
+    placeholder: { default: "" },
+    apmColumnPlacement: { default: "last" },
+    customText: { default: () => ({}) },
+    showIcon: { type: Boolean, default: true },
+    showHeader: { type: Boolean, default: true },
+    hourRange: { default: () => [] },
+    minRange: { default: () => [] },
+    secRange: { default: () => [] }
   },
   emits: ["update:modelValue", "open", "close", "change"],
   setup(__props, { emit: __emit }) {
@@ -1096,7 +1066,6 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
     validModelValueAndFormat();
     watch(() => props.modelValue, () => {
-      validModelValueAndFormat();
     });
     onClickOutside(reTimePickerRef, () => handleExpandStatus(false));
     return (_ctx, _cache) => {
@@ -1105,7 +1074,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         ref: reTimePickerRef,
         class: "re-time-picker"
       }, [
-        createVNode(_sfc_main$3, { disabled: __props.disabled }, createSlots({
+        createVNode(_sfc_main$3, { disabled: _ctx.disabled }, createSlots({
           default: withCtx(() => [
             createElementVNode("div", {
               class: "time-picker",
@@ -1115,13 +1084,13 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 value: unref(timeString),
                 class: "time-picker__field",
                 readonly: "",
-                placeholder: __props.placeholder
+                placeholder: _ctx.placeholder
               }, null, 8, _hoisted_1)
             ])
           ]),
           suffix: withCtx(() => [
             renderSlot(_ctx.$slots, "suffix", {}, () => [
-              __props.showIcon ? (openBlock(), createElementBlock("img", {
+              _ctx.showIcon ? (openBlock(), createElementBlock("img", {
                 key: 0,
                 class: normalizeClass(["drop-icon", {
                   "drop-icon--active": unref(isExpand)
@@ -1155,14 +1124,14 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               "time-string": unref(timeString),
               "is-valid-model-value": unref(isValidModelValue),
               show,
-              "show-header": __props.showHeader,
+              "show-header": _ctx.showHeader,
               "is-valid-a-type": unref(isValidAType),
               "format-type": unref(formatType),
-              "apm-column-placement": __props.apmColumnPlacement,
+              "apm-column-placement": _ctx.apmColumnPlacement,
               "custom-text": unref(formatDefaultCustomText),
-              "hour-range": __props.hourRange,
-              "min-range": __props.minRange,
-              "sec-range": __props.secRange,
+              "hour-range": _ctx.hourRange,
+              "min-range": _ctx.minRange,
+              "sec-range": _ctx.secRange,
               "h-mode": unref(hMode),
               onUpdateTime: updateTime
             }, null, 8, ["time-data", "time-string", "is-valid-model-value", "show", "show-header", "is-valid-a-type", "format-type", "apm-column-placement", "custom-text", "hour-range", "min-range", "sec-range", "h-mode"])
@@ -1173,8 +1142,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const TimePicker_vue_vue_type_style_index_0_scoped_ccc04e02_lang = "";
-const ReTimePicker = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-ccc04e02"]]);
+const TimePicker_vue_vue_type_style_index_0_scoped_92236f71_lang = "";
+const ReTimePicker = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-92236f71"]]);
 export {
   ReTimePicker as default
 };

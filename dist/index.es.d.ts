@@ -21,22 +21,6 @@ declare type CustomText = {
 declare type CustomTextUnion = 'apm' | 'am' | 'pm' | 'hour' | 'min' | 'sec';
 
 declare const _default: __VLS_WithTemplateSlots<DefineComponent<{
-    modelValue: {
-        type: StringConstructor;
-        default: string;
-    };
-    format: {
-        type: StringConstructor;
-        default: () => string;
-    };
-    disabled: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    placeholder: {
-        type: StringConstructor;
-        default: string;
-    };
     apmColumnPlacement: {
         type: globalThis.PropType<ApmColumnPlacement>;
         default: string;
@@ -45,12 +29,8 @@ declare const _default: __VLS_WithTemplateSlots<DefineComponent<{
         type: globalThis.PropType<Partial<CustomText>>;
         default: () => {};
     };
-    showIcon: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
     showHeader: {
-        type: BooleanConstructor;
+        type: globalThis.PropType<boolean>;
         default: boolean;
     };
     hourRange: {
@@ -64,6 +44,27 @@ declare const _default: __VLS_WithTemplateSlots<DefineComponent<{
     secRange: {
         type: globalThis.PropType<CusTimeListRange>;
         default: () => never[];
+    };
+    disabled: {
+        type: globalThis.PropType<boolean>;
+        default: boolean;
+    };
+    placeholder: {
+        type: globalThis.PropType<string>;
+        default: string;
+    };
+    modelValue: {
+        type: globalThis.PropType<string>;
+        required: true;
+        default: string;
+    };
+    format: {
+        type: globalThis.PropType<string>;
+        default: () => "HH:mm:ss A";
+    };
+    showIcon: {
+        type: globalThis.PropType<boolean>;
+        default: boolean;
     };
 }, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
     "update:modelValue": (...args: any[]) => void;
@@ -71,22 +72,6 @@ declare const _default: __VLS_WithTemplateSlots<DefineComponent<{
     close: (...args: any[]) => void;
     change: (...args: any[]) => void;
 }, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<{
-    modelValue: {
-        type: StringConstructor;
-        default: string;
-    };
-    format: {
-        type: StringConstructor;
-        default: () => string;
-    };
-    disabled: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    placeholder: {
-        type: StringConstructor;
-        default: string;
-    };
     apmColumnPlacement: {
         type: globalThis.PropType<ApmColumnPlacement>;
         default: string;
@@ -95,12 +80,8 @@ declare const _default: __VLS_WithTemplateSlots<DefineComponent<{
         type: globalThis.PropType<Partial<CustomText>>;
         default: () => {};
     };
-    showIcon: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
     showHeader: {
-        type: BooleanConstructor;
+        type: globalThis.PropType<boolean>;
         default: boolean;
     };
     hourRange: {
@@ -114,6 +95,27 @@ declare const _default: __VLS_WithTemplateSlots<DefineComponent<{
     secRange: {
         type: globalThis.PropType<CusTimeListRange>;
         default: () => never[];
+    };
+    disabled: {
+        type: globalThis.PropType<boolean>;
+        default: boolean;
+    };
+    placeholder: {
+        type: globalThis.PropType<string>;
+        default: string;
+    };
+    modelValue: {
+        type: globalThis.PropType<string>;
+        required: true;
+        default: string;
+    };
+    format: {
+        type: globalThis.PropType<string>;
+        default: () => "HH:mm:ss A";
+    };
+    showIcon: {
+        type: globalThis.PropType<boolean>;
+        default: boolean;
     };
 }>> & {
     onChange?: ((...args: any[]) => any) | undefined;
