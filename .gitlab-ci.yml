@@ -5,7 +5,7 @@ pages:
       - node_modules/
   script:
     # - apk add git # Uncomment this if you're using small docker images like alpine and have lastUpdated enabled
-    - npm install pnpm
+    - npm install pnpm -g
     - pnpm install
     - pnpm run docs:build
   artifacts:
