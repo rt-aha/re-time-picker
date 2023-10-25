@@ -1,1 +1,0 @@
-import{_ as s,o as a,c as n,Q as l}from"./chunks/framework.0831fdda.js";const F=JSON.parse('{"title":"Slots","description":"","frontmatter":{},"headers":[],"relativePath":"slots/index.md","filePath":"slots/index.md"}'),p={name:"slots/index.md"},o=l("",10),e=[o];function t(c,r,E,y,i,u){return a(),n("div",null,e)}const g=s(p,[["render",t]]);export{F as __pageData,g as default};
