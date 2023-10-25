@@ -131,9 +131,7 @@
   outline: 0  transparent;
 }
 
-@mixin form-font() {
-  @include font-style($c-form-basic, 14, 400, 1px, 18px);
-}
+
 
 @mixin disabled() {
   cursor: not-allowed;

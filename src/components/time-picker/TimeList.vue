@@ -277,7 +277,6 @@ setAllScrollBarPosition();
 $item-height: 30px;
 
 .re-time-list {
-  background-color: $c-white;
 
   &--show-header {
     .time-range__header {

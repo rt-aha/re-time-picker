@@ -402,7 +402,7 @@ onClickOutside(reTimePickerRef, () => handleExpandStatus(false));
   @include flex();
 
   &__field {
-    @include font-style(var(--rtp-field-value), 14, 400, 1px);
+    @include font-style(var(--rtp-field-value), 14, 400);
     width: 100%;
     height: 100%;
     cursor: inherit;

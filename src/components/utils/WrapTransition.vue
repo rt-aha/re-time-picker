@@ -27,6 +27,7 @@ withDefaults(defineProps<Props>(), {
   overflow: hidden;
   border-radius: var(--rtp-dropdown-border-radius);
   border: 1px solid var(--rtp-dropdown-border-color);
+  background-color: var(--rtp-dropdown-bg-color);
 }
 
 .v-enter-active,

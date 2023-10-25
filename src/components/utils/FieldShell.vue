@@ -56,7 +56,7 @@ const slots = useSlots();
 
     &__prefix {
       @include padding(0 0 0 8px);
-      @include form-font();
+      @include font-style(var(--rtp-field-value), 14, 400);
       @include flex(center);
       flex: none;
       width: auto;
@@ -71,7 +71,7 @@ const slots = useSlots();
 
     &__suffix {
       @include padding(0 8px 0 0);
-      @include form-font();
+      @include font-style(var(--rtp-field-value), 14, 400);
       @include flex(center);
       flex: none;
       width: auto;
