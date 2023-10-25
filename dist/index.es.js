@@ -360,7 +360,7 @@ const genFullRange = (type, hMode, list) => {
   } else {
     limit = 60;
   }
-  const fullRange = [];
+  let fullRange = [];
   const pushToRange = (num) => {
     if (num >= 0 && num < limit) {
       fullRange.push(num);
@@ -374,6 +374,19 @@ const genFullRange = (type, hMode, list) => {
       for (let j = item[0]; j <= item[1]; j++) {
         pushToRange(j);
       }
+    }
+  });
+  fullRange = fullRange.filter((item, index, arr) => {
+    return arr.indexOf(item, 0) === index;
+  });
+  fullRange.sort((x, y) => {
+    if (x === y) {
+      return 0;
+    }
+    if (x > y) {
+      return 1;
+    } else {
+      return -1;
     }
   });
   return fullRange;
@@ -1066,6 +1079,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
     validModelValueAndFormat();
     watch(() => props.modelValue, () => {
+      validModelValueAndFormat();
     });
     onClickOutside(reTimePickerRef, () => handleExpandStatus(false));
     return (_ctx, _cache) => {
@@ -1142,8 +1156,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const TimePicker_vue_vue_type_style_index_0_scoped_92236f71_lang = "";
-const ReTimePicker = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-92236f71"]]);
+const TimePicker_vue_vue_type_style_index_0_scoped_be8857f6_lang = "";
+const ReTimePicker = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-be8857f6"]]);
 export {
   ReTimePicker as default
 };
