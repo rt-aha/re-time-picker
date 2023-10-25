@@ -4,9 +4,8 @@ pages:
     paths:
       - node_modules/
   script:
-    # - apk add git # Uncomment this if you're using small docker images like alpine and have lastUpdated enabled
     - npm install pnpm -g
-    - pnpm install
+    - pnpm install --no-frozen-lockfile
     - pnpm run docs:build
   artifacts:
     paths:
