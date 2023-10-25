@@ -16,7 +16,11 @@
 <script setup lang="ts">
 import { ReTimePicker } from '@/components/time-picker';
 
-const val1 = ref('10:10:10 上午');
+const val1 = ref('10:10:12 上午');
+
+setTimeout(() => {
+  val1.value = '14:09:32 上午';
+}, 1000);
 
 const customText = {
   am: '上午',

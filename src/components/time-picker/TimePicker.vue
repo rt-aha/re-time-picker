@@ -370,7 +370,6 @@ const validModelValueAndFormat = () => {
 };
 
 const updateTime = async (val: TimeData) => {
-  // console.log('%cval -->', 'color: #059669; background-color: #D1FAE5', val);
   genTimeDataAndString(val);
 
   emit('update:modelValue', timeString.value);
@@ -382,7 +381,7 @@ const updateTime = async (val: TimeData) => {
 validModelValueAndFormat();
 
 watch(() => props.modelValue, () => {
-  // validModelValueAndFormat();
+  validModelValueAndFormat();
 });
 onClickOutside(reTimePickerRef, () => handleExpandStatus(false));
 </script>
