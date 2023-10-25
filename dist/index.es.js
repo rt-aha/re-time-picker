@@ -1,5 +1,6 @@
 import { getCurrentScope, onScopeDispose, unref, watch, defineComponent, computed, ref, openBlock, createElementBlock, normalizeClass, createElementVNode, toDisplayString, Fragment, renderList, createCommentVNode, normalizeStyle, nextTick, useSlots, renderSlot, createBlock, Transition, withCtx, withDirectives, vShow, createVNode, reactive, createSlots } from "vue";
 const _imports_0 = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik0xMiAyMGM0LjQgMCA4LTMuNiA4LThzLTMuNi04LTgtOHMtOCAzLjYtOCA4czMuNiA4IDggOG0wLTE4YzUuNSAwIDEwIDQuNSAxMCAxMHMtNC41IDEwLTEwIDEwUzIgMTcuNSAyIDEyUzYuNSAyIDEyIDJtNSA5LjVWMTNoLTZWN2gxLjV2NC41SDE3WiIvPjwvc3ZnPg==";
+const _color = "";
 function tryOnScopeDispose(fn) {
   if (getCurrentScope()) {
     onScopeDispose(fn);
@@ -737,7 +738,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
   __name: "FieldShell",
   props: {
     disabled: { type: Boolean, default: false },
-    placeholder: { default: "placeholder ..." }
+    placeholder: { default: "placeholder" }
   },
   setup(__props) {
     const slots = useSlots();
@@ -1184,8 +1185,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const TimePicker_vue_vue_type_style_index_0_scoped_d5c5b05d_lang = "";
-const ReTimePicker = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-d5c5b05d"]]);
+const TimePicker_vue_vue_type_style_index_0_scoped_0631bd04_lang = "";
+const ReTimePicker = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-0631bd04"]]);
 export {
   ReTimePicker as default
 };
