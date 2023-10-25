@@ -42,6 +42,7 @@ const slots = useSlots();
   min-height: 36px;
   border: 1px solid var(--rtp-field-border-color);
   border-radius: var(--rtp-field-border-radius);
+  background-color: var(--rtp-field-bg);
   cursor: pointer;
 
   &--disabled {

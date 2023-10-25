@@ -9,6 +9,7 @@
   --rtp-header-bg: #cccccc50;
   --rtp-header-text: var(--rtp-main);
   --rtp-field-value: var(--rtp-black);
+  --rtp-field-bg: var(--rtp-white);
   --rtp-field-border-color: var(--rtp-assist);
   --rtp-dropdown-border-color: var(--rtp-assist);
   --rtp-dropdown-bg-color: var(--rtp-white);
@@ -20,6 +21,25 @@
   --rtp-dropdown-border-radius: var(--rtp-border-radius);
 }
 
-:root {
-  // --rtp-dropdown-bg-color: #ff0000;
-}
+// :root {
+//   // shared
+//   --rtp-main: #ff0000;
+//   --rtp-black: #00ff00;
+//   --rtp-white: #0000ff;
+//   --rtp-assist: #aa0000;
+//   --rtp-border-radius: 10px;
+//   // specific - color
+//   --rtp-header-bg: #cccccc50;
+//   --rtp-header-text: var(--rtp-main);
+//   --rtp-field-value: var(--rtp-black);
+//   --rtp-field-bg: var(--rtp-white);
+//   --rtp-field-border-color: var(--rtp-assist);
+//   --rtp-dropdown-border-color: var(--rtp-assist);
+//   --rtp-dropdown-bg-color: var(--rtp-white);
+//   --rtp-value-line: var(--rtp-assist);
+//   --rtp-range-item: var(--rtp-black);
+//   --rtp-divide-line: var(--rtp-assist);
+//   // specific - radius
+//   --rtp-field-border-radius: var(--rtp-border-radius);
+//   --rtp-dropdown-border-radius: var(--rtp-border-radius);
+// }
