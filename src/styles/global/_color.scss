@@ -44,3 +44,29 @@ $c-note: #ddd;
 
 
 
+
+
+:root {
+  // shared
+  --rtp-main: #1a237e;
+  --rtp-black: #000000;
+  --rtp-white: #ffffff;
+  --rtp-assist: #cccccc;
+  --rtp-border-radius: 4px;
+  // specific
+  --rtp-header-bg: #cccccc50;
+  --rtp-header-text: var(--rtp-main);
+  --rtp-field-value: var(--rtp-black);
+  --rtp-field-border-color: var(--rtp-assist);
+  --rtp-field-border-radius: var(--rtp-border-radius);
+  --rtp-dropdown-border-color: var(--rtp-assist);
+  --rtp-dropdown-border-radius: var(--rtp-border-radius);
+  --rtp-dropdown-bg-color: var(--rtp-white);
+  --rtp-value-line: var(--rtp-assist);
+  --rtp-range-item: var(--rtp-black);
+  --rtp-divide-line: var(--rtp-assist);
+}
+
+:root {
+  // --rtp-dropdown-bg-color: #ff0000;
+}

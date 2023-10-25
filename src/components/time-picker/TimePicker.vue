@@ -394,19 +394,6 @@ onClickOutside(reTimePickerRef, () => handleExpandStatus(false));
 .apm {
   @include padding(5px);
   @include flex(flex-end);
-
-  &__opt {
-    background-color: transparent;
-    border: 0;
-    outline: 0;
-    background-color: $c-form-assist;
-    @include padding(2px 4px);
-    @include font-style($c-form-main, 14, 400, 1px);
-
-    &+& {
-      margin-left: 5px;
-    }
-  }
 }
 .time-picker {
   position: relative;
@@ -415,7 +402,7 @@ onClickOutside(reTimePickerRef, () => handleExpandStatus(false));
   @include flex();
 
   &__field {
-    @include font-style($c-black, 14, 400, 1px);
+    @include font-style(var(--rtp-field-value), 14, 400, 1px);
     width: 100%;
     height: 100%;
     cursor: inherit;
@@ -430,4 +417,3 @@ onClickOutside(reTimePickerRef, () => handleExpandStatus(false));
   width: 15px;
 }
 </style>
-@/components/time-picker/timeListConfig@/components/time-picker/timeListConfig

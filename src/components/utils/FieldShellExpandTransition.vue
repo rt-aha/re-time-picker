@@ -41,10 +41,8 @@ watch(() => props.show, () => {
 
 <style lang="scss" scoped>
 .field-shell-expand-transition {
-  // @include position(tl, calc(100% + 5px), 0);
   z-index: 100;
   width: 100%;
-  // background-color: $c-white;
 
   &--position {
     &--top {
@@ -55,38 +53,6 @@ watch(() => props.show, () => {
 
     &--bottom {
       @include position(tl, calc(100% + 5px), 0);
-    }
-  }
-}
-
-.option-list {
-  height: auto;
-  max-height: 200px;
-  overflow: auto;
-  background-color: $c-white;
-
-  &__item {
-    @include padding(0 10px);
-    @include flex(center, center);
-    min-height: 36px;
-    height: 100%;
-    cursor: pointer;
-
-    &:hover {
-      background-color: rgba($c-form-hover-bg, 0.2);
-
-    }
-
-    &--active {
-
-      .option-list__item__check-icon {
-        display: inline-block;
-        vertical-align: bottom;
-      }
-    }
-
-    &--disabled {
-      @include disabled();
     }
   }
 }

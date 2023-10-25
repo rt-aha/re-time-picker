@@ -300,7 +300,7 @@ $item-height: 30px;
     width: 100%;
     height: 1px;
     content: "";
-    background-color: $c-form-assist;
+    background-color: var(--rtp-value-line);
     transform: translateX(-50%);
   }
 
@@ -311,7 +311,7 @@ $item-height: 30px;
     width: 100%;
     height: 1px;
     content: "";
-    background-color: $c-form-assist;
+    background-color: var(--rtp-value-line);
     transform: translateX(-50%);
   }
 
@@ -329,11 +329,10 @@ $item-height: 30px;
     top: 0;
     left: 0;
     z-index: 10;
-    background-color: rgba($c-form-assist2, 0.5);
-    @include font-style($c-main, 14, 700);
+    background-color: var(--rtp-header-bg);
+    @include font-style(var(--rtp-header-text), 14, 700);
     backdrop-filter: blur(2px);
     display: none;
-    // display: inline-flex;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -354,16 +353,11 @@ $item-height: 30px;
     &::-webkit-scrollbar {
       width: 4px;
       height: 8px;
-      // background-color: $c-white
+
     }
 
-    // &::-webkit-scrollbar-thumb {
-    //   border-radius: 4px;
-    //   background: $c-form-main;
-    // }
-
     &__item {
-      @include font-style($c-form-main, 14);
+      @include font-style(var(--rtp-range-item), 14);
       box-sizing: border-box;
       display: inline-flex;
       align-items: center;
@@ -381,7 +375,7 @@ $item-height: 30px;
   transform: translateY(-50%);
   width: 1px;
   height: 100%;
-  background-color: $c-form-assist;
+  background-color: var(--rtp-divide-line);
 
   &--25 {
     left: 25%;

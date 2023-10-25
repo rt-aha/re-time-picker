@@ -3,7 +3,7 @@
     <ReTimePicker
       v-model="val1"
       format="A HH:mm:ss"
-      :show-header="false"
+      :show-header="true"
       apm-column-placement="first"
       :custom-text="customText"
       :hour-range="[13, 11, 12, 0, 1, 2, [4, 10], 13]"

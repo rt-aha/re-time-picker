@@ -40,8 +40,8 @@ const slots = useSlots();
   width: 100%;
   height: 100%;
   min-height: 36px;
-  border: 1px solid $c-form-assist;
-  border-radius: 4px;
+  border: 1px solid var(--rtp-field-border-color);
+  border-radius: var(--rtp-field-border-radius);
   cursor: pointer;
 
   &--disabled {
