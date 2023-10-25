@@ -141,7 +141,7 @@ Whether to show the header in the dropdown
 - type: `Array<[number, number] | number>`
 - default: `[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]`
 
-The range can be set like `[0, 1, 2, [4, 10], 10, 11, 12]`
+The range can be set like `[0, 1, 2, [4, 10], 13, 11, 12]`
 The number in the array which over 23 will be eliminated.
 If the format's hour token give `h` or `hh`, the number over 11 will be eliminated.
 

@@ -6,6 +6,7 @@
       :show-header="false"
       apm-column-placement="first"
       :custom-text="customText"
+      :hour-range="[13, 11, 12, 0, 1, 2, [4, 10], 13]"
       @close="onClose"
       @open="onOpen"
       @change="onChange"

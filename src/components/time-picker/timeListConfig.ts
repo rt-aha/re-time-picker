@@ -123,6 +123,13 @@ const checkIsLegalTimeListArray = (arr: number[] | number): boolean => {
   }
 };
 
+/**
+ * push in to timeList
+ * 1. filter hMode
+ * 2. remove duplicate
+ * 3. sort
+ */
+
 const genFullRange = (type: HmsType, hMode: HMode, list: CusTimeListRange) => {
   let limit = 0;
 
@@ -138,7 +145,7 @@ const genFullRange = (type: HmsType, hMode: HMode, list: CusTimeListRange) => {
     limit = 60;
   }
 
-  const fullRange: number[] = [];
+  let fullRange: number[] = [];
   const pushToRange = (num: number) => {
     if (num >= 0 && num < limit) {
       fullRange.push(num);
@@ -158,19 +165,22 @@ const genFullRange = (type: HmsType, hMode: HMode, list: CusTimeListRange) => {
     }
   });
 
-  // for (let i = 0; i < list.length; i++) {
-  //   const isLegalArray = checkIsLegalTimeListArray(list[i]);
-  //   const item = list[i];
+  fullRange = fullRange.filter((item, index, arr) => {
+    return arr.indexOf(item, 0) === index;
+  });
 
-  //   if (typeof item === 'number') {
-  //     pushToRange(item);
-  //   }
-  //   else if (isLegalArray) {
-  //     for (let j = item[0]; j <= item[1]; j++) {
-  //       pushToRange(j);
-  //     }
-  //   }
-  // }
+  fullRange.sort((x, y) => {
+    if (x === y) {
+      return 0;
+    }
+
+    if (x > y) {
+      return 1;
+    }
+    else {
+      return -1;
+    }
+  });
 
   return fullRange;
 };
