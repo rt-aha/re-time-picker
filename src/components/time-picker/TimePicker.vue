@@ -39,6 +39,9 @@
           :hour-range="hourRange"
           :min-range="minRange"
           :sec-range="secRange"
+          :hour-interval="hourInterval"
+          :min-interval="minInterval"
+          :sec-interval="secInterval"
           :h-mode="hMode"
           @updateTime="updateTime"
         />
@@ -91,6 +94,9 @@ interface Props {
   hourRange?: CusTimeListRange
   minRange?: CusTimeListRange
   secRange?: CusTimeListRange
+  hourInterval: number
+  minInterval: number
+  secInterval: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -105,6 +111,9 @@ const props = withDefaults(defineProps<Props>(), {
   hourRange: () => [],
   minRange: () => [],
   secRange: () => [],
+  hourInterval: 1,
+  minInterval: 1,
+  secInterval: 1,
 });
 
 const emit = defineEmits(['update:modelValue', 'open', 'close', 'change']);

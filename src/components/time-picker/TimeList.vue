@@ -103,6 +103,9 @@ interface Props {
   minRange: CusTimeListRange
   secRange: CusTimeListRange
   hMode: HMode
+  hourInterval: number
+  minInterval: number
+  secInterval: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -139,9 +142,9 @@ const tls = ref();
 const tlapm = ref();
 
 const timeList = computed<TimeList>(() => ({
-  h: genTimeList('h', props.hourRange, props.hMode, props.showHeader, { isValidAType: props.isValidAType }),
-  m: genTimeList('m', props.minRange, props.hMode, props.showHeader, {}),
-  s: genTimeList('s', props.secRange, props.hMode, props.showHeader, {}),
+  h: genTimeList('h', props.hourRange, props.hMode, props.showHeader, { interval: props.hourInterval, isValidAType: props.isValidAType }),
+  m: genTimeList('m', props.minRange, props.hMode, props.showHeader, { interval: props.minInterval }),
+  s: genTimeList('s', props.secRange, props.hMode, props.showHeader, { interval: props.secInterval }),
   apm,
 }));
 

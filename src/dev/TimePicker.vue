@@ -2,10 +2,11 @@
   <div class="v-time-picker">
     <ReTimePicker
       v-model="val1"
-      format="HH:mm:ss A"
+      format="HH:mm A"
       :show-header="true"
       :custom-text="customText"
       :hour-range="[13, 11, 12, 0, 1, 2, [4, 10], 13]"
+      :hour-interval="2"
       @close="onClose"
       @open="onOpen"
       @change="onChange"
@@ -19,7 +20,7 @@ import { ReTimePicker } from '@/components/time-picker';
 const val1 = ref('10:10:12 AM');
 
 setTimeout(() => {
-  val1.value = '13:09:32 PM';
+  val1.value = '12:09:32 PM';
 }, 1000);
 
 const customText = {
