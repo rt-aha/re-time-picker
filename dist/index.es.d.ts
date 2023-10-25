@@ -45,6 +45,21 @@ declare const _default: __VLS_WithTemplateSlots<DefineComponent<{
         type: globalThis.PropType<CusTimeListRange>;
         default: () => never[];
     };
+    hourInterval: {
+        type: globalThis.PropType<number>;
+        required: true;
+        default: number;
+    };
+    minInterval: {
+        type: globalThis.PropType<number>;
+        required: true;
+        default: number;
+    };
+    secInterval: {
+        type: globalThis.PropType<number>;
+        required: true;
+        default: number;
+    };
     disabled: {
         type: globalThis.PropType<boolean>;
         default: boolean;
@@ -96,6 +111,21 @@ declare const _default: __VLS_WithTemplateSlots<DefineComponent<{
         type: globalThis.PropType<CusTimeListRange>;
         default: () => never[];
     };
+    hourInterval: {
+        type: globalThis.PropType<number>;
+        required: true;
+        default: number;
+    };
+    minInterval: {
+        type: globalThis.PropType<number>;
+        required: true;
+        default: number;
+    };
+    secInterval: {
+        type: globalThis.PropType<number>;
+        required: true;
+        default: number;
+    };
     disabled: {
         type: globalThis.PropType<boolean>;
         default: boolean;
@@ -129,6 +159,9 @@ declare const _default: __VLS_WithTemplateSlots<DefineComponent<{
     hourRange: CusTimeListRange;
     minRange: CusTimeListRange;
     secRange: CusTimeListRange;
+    hourInterval: number;
+    minInterval: number;
+    secInterval: number;
     disabled: boolean;
     placeholder: string;
     modelValue: string;

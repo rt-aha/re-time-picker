@@ -435,26 +435,31 @@ const genTimeList = (type, range, hMode, showHeader, options) => {
 };
 const defaultFormat = "HH:mm:ss A";
 const apm = ["", "", "", "am", "pm", "", "", ""];
-const _hoisted_1$3 = { class: "time-list" };
+const _hoisted_1$4 = { class: "time-list" };
 const _hoisted_2$1 = {
   key: 0,
   class: "time-range"
 };
 const _hoisted_3$1 = { class: "time-range__header" };
-const _hoisted_4$1 = { class: "time-range" };
-const _hoisted_5 = { class: "time-range__header" };
-const _hoisted_6 = { class: "time-range" };
-const _hoisted_7 = { class: "time-range__header" };
-const _hoisted_8 = {
+const _hoisted_4$1 = ["onClick"];
+const _hoisted_5 = { class: "time-range" };
+const _hoisted_6 = { class: "time-range__header" };
+const _hoisted_7 = ["onClick"];
+const _hoisted_8 = { class: "time-range" };
+const _hoisted_9 = { class: "time-range__header" };
+const _hoisted_10 = ["onClick"];
+const _hoisted_11 = {
   key: 1,
   class: "time-range"
 };
-const _hoisted_9 = { class: "time-range__header" };
-const _hoisted_10 = {
+const _hoisted_12 = { class: "time-range__header" };
+const _hoisted_13 = ["onClick"];
+const _hoisted_14 = {
   key: 2,
   class: "time-range"
 };
-const _hoisted_11 = { class: "time-range__header" };
+const _hoisted_15 = { class: "time-range__header" };
+const _hoisted_16 = ["onClick"];
 const SCROLL_OFFSET = 30;
 const ADJUST_OFFSET = 3;
 const _sfc_main$4 = /* @__PURE__ */ defineComponent({
@@ -472,7 +477,10 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
     hourRange: { default: () => [] },
     minRange: { default: () => [] },
     secRange: { default: () => [] },
-    hMode: {}
+    hMode: {},
+    hourInterval: {},
+    minInterval: {},
+    secInterval: {}
   },
   emits: ["updateTime"],
   setup(__props, { emit: __emit }) {
@@ -492,14 +500,12 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
     const tls = ref();
     const tlapm = ref();
     const timeList = computed(() => ({
-      // h: genTimeList('h', { hourInterval: 5, hourRange: [0, 1, 2, 3, [4, 6], 10, 11, 12, 13, 14, 15, 16, 17, 18] }),
-      h: genTimeList("h", props.hourRange, props.hMode, props.showHeader, { isValidAType: props.isValidAType }),
-      m: genTimeList("m", props.minRange, props.hMode, props.showHeader, {}),
-      s: genTimeList("s", props.secRange, props.hMode, props.showHeader, {}),
+      h: genTimeList("h", props.hourRange, props.hMode, props.showHeader, { interval: props.hourInterval, isValidAType: props.isValidAType }),
+      m: genTimeList("m", props.minRange, props.hMode, props.showHeader, { interval: props.minInterval }),
+      s: genTimeList("s", props.secRange, props.hMode, props.showHeader, { interval: props.secInterval }),
       apm
     }));
     const apmLabel = computed(() => ({
-      // am: 'am',
       am: props.customText.am,
       pm: props.customText.pm
     }));
@@ -562,38 +568,55 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
     const setPositionDebounce = debounce((tlType) => {
       calcScrollBarPosition(tlType);
     }, 100);
-    const setScrollBarPosition = async () => {
+    const setScrollBarPosition = async (tlType, compareVal) => {
+      await nextTick();
+      const setScrollTopStrategies = {
+        tlh() {
+          const idx = timeList.value.h.findIndex((item) => item === compareVal) - ADJUST_OFFSET;
+          setTlScrollTop(tlType, (idx > 0 ? idx : 0) * SCROLL_OFFSET);
+        },
+        tlm() {
+          const idx = timeList.value.m.findIndex((item) => item === compareVal) - ADJUST_OFFSET;
+          setTlScrollTop(tlType, (idx > 0 ? idx : 0) * SCROLL_OFFSET);
+        },
+        tls() {
+          const idx = timeList.value.s.findIndex((item) => item === compareVal) - ADJUST_OFFSET;
+          setTlScrollTop(tlType, (idx > 0 ? idx : 0) * SCROLL_OFFSET);
+        },
+        tlapm() {
+          const idx = timeList.value.apm.findIndex((item) => {
+            if (item === "") {
+              return false;
+            }
+            return props.customText[item] === props.timeData.apm;
+          }) - ADJUST_OFFSET;
+          setTlScrollTop(tlType, (idx > 0 ? idx : 0) * SCROLL_OFFSET);
+        }
+      };
+      setScrollTopStrategies[tlType]();
+    };
+    const setAllScrollBarPosition = () => {
       if (!props.isValidModelValue) {
         return;
       }
-      await nextTick();
-      const hIdx = timeList.value.h.findIndex((item) => item === props.timeData.h) - ADJUST_OFFSET;
-      const mIdx = timeList.value.m.findIndex((item) => item === props.timeData.m) - ADJUST_OFFSET;
-      const sIdx = timeList.value.s.findIndex((item) => item === props.timeData.s) - ADJUST_OFFSET;
-      const apmIdx = timeList.value.apm.findIndex((item) => {
-        if (item === "") {
-          return false;
-        }
-        return props.customText[item] === props.timeData.apm;
-      }) - ADJUST_OFFSET;
-      setTlScrollTop("tlh", (hIdx > 0 ? hIdx : 0) * SCROLL_OFFSET);
-      setTlScrollTop("tlm", (mIdx > 0 ? mIdx : 0) * SCROLL_OFFSET);
-      setTlScrollTop("tls", (sIdx > 0 ? sIdx : 0) * SCROLL_OFFSET);
-      setTlScrollTop("tlapm", (apmIdx > 0 ? apmIdx : 0) * SCROLL_OFFSET);
+      setScrollBarPosition("tlh", props.timeData.h);
+      setScrollBarPosition("tlm", props.timeData.m);
+      setScrollBarPosition("tls", props.timeData.s);
+      setScrollBarPosition("tlapm", props.timeData.apm);
     };
     watch(() => [props.show, props.isValidModelValue, props.timeString], (newVal) => {
       if (newVal[0] && newVal[1]) {
-        setScrollBarPosition();
+        setAllScrollBarPosition();
       }
     });
-    setScrollBarPosition();
+    setAllScrollBarPosition();
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", {
         class: normalizeClass(["re-time-list", {
           "re-time-list--show-header": _ctx.showHeader
         }])
       }, [
-        createElementVNode("div", _hoisted_1$3, [
+        createElementVNode("div", _hoisted_1$4, [
           _ctx.isValidAType && _ctx.apmColumnPlacement === "first" ? (openBlock(), createElementBlock("div", _hoisted_2$1, [
             createElementVNode("span", _hoisted_3$1, toDisplayString(_ctx.customText.apm), 1),
             createElementVNode("div", {
@@ -605,13 +628,14 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
               (openBlock(true), createElementBlock(Fragment, null, renderList(unref(timeList).apm, (apmVal) => {
                 return openBlock(), createElementBlock("span", {
                   key: apmVal,
-                  class: "time-range__list__item"
-                }, toDisplayString(apmVal === "" ? apmVal : _ctx.customText[apmVal]), 1);
+                  class: "time-range__list__item",
+                  onClick: () => setScrollBarPosition("tlapm", apmVal)
+                }, toDisplayString(apmVal === "" ? apmVal : _ctx.customText[apmVal]), 9, _hoisted_4$1);
               }), 128))
             ], 544)
           ])) : createCommentVNode("", true),
-          createElementVNode("div", _hoisted_4$1, [
-            createElementVNode("span", _hoisted_5, toDisplayString(_ctx.customText.hour), 1),
+          createElementVNode("div", _hoisted_5, [
+            createElementVNode("span", _hoisted_6, toDisplayString(_ctx.customText.hour), 1),
             createElementVNode("div", {
               ref_key: "tlh",
               ref: tlh,
@@ -621,45 +645,48 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
               (openBlock(true), createElementBlock(Fragment, null, renderList(unref(timeList).h, (hour, index) => {
                 return openBlock(), createElementBlock("span", {
                   key: hour + index,
-                  class: "time-range__list__item"
-                }, toDisplayString(hour), 1);
+                  class: "time-range__list__item",
+                  onClick: () => setScrollBarPosition("tlh", hour)
+                }, toDisplayString(hour), 9, _hoisted_7);
               }), 128))
             ], 544)
           ]),
-          createElementVNode("div", _hoisted_6, [
-            createElementVNode("span", _hoisted_7, toDisplayString(_ctx.customText.min), 1),
+          createElementVNode("div", _hoisted_8, [
+            createElementVNode("span", _hoisted_9, toDisplayString(_ctx.customText.min), 1),
             createElementVNode("div", {
               ref_key: "tlm",
               ref: tlm,
               class: "time-range__list",
               onScroll: _cache[2] || (_cache[2] = () => unref(setPositionDebounce)("tlm"))
             }, [
-              (openBlock(true), createElementBlock(Fragment, null, renderList(unref(timeList).m, (hour, index) => {
+              (openBlock(true), createElementBlock(Fragment, null, renderList(unref(timeList).m, (min, index) => {
                 return openBlock(), createElementBlock("span", {
-                  key: hour + index,
-                  class: "time-range__list__item"
-                }, toDisplayString(hour), 1);
+                  key: min + index,
+                  class: "time-range__list__item",
+                  onClick: () => setScrollBarPosition("tlm", min)
+                }, toDisplayString(min), 9, _hoisted_10);
               }), 128))
             ], 544)
           ]),
-          _ctx.formatType === "HMS" ? (openBlock(), createElementBlock("div", _hoisted_8, [
-            createElementVNode("span", _hoisted_9, toDisplayString(_ctx.customText.sec), 1),
+          _ctx.formatType === "HMS" ? (openBlock(), createElementBlock("div", _hoisted_11, [
+            createElementVNode("span", _hoisted_12, toDisplayString(_ctx.customText.sec), 1),
             createElementVNode("div", {
               ref_key: "tls",
               ref: tls,
               class: "time-range__list",
               onScroll: _cache[3] || (_cache[3] = () => unref(setPositionDebounce)("tls"))
             }, [
-              (openBlock(true), createElementBlock(Fragment, null, renderList(unref(timeList).s, (hour, index) => {
+              (openBlock(true), createElementBlock(Fragment, null, renderList(unref(timeList).s, (sec, index) => {
                 return openBlock(), createElementBlock("span", {
-                  key: hour + index,
-                  class: "time-range__list__item"
-                }, toDisplayString(hour), 1);
+                  key: sec + index,
+                  class: "time-range__list__item",
+                  onClick: () => setScrollBarPosition("tls", sec)
+                }, toDisplayString(sec), 9, _hoisted_13);
               }), 128))
             ], 544)
           ])) : createCommentVNode("", true),
-          _ctx.isValidAType && _ctx.apmColumnPlacement === "last" ? (openBlock(), createElementBlock("div", _hoisted_10, [
-            createElementVNode("span", _hoisted_11, toDisplayString(_ctx.customText.apm), 1),
+          _ctx.isValidAType && _ctx.apmColumnPlacement === "last" ? (openBlock(), createElementBlock("div", _hoisted_14, [
+            createElementVNode("span", _hoisted_15, toDisplayString(_ctx.customText.apm), 1),
             createElementVNode("div", {
               ref_key: "tlapm",
               ref: tlapm,
@@ -669,8 +696,9 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
               (openBlock(true), createElementBlock(Fragment, null, renderList(unref(timeList).apm, (apmVal) => {
                 return openBlock(), createElementBlock("span", {
                   key: apmVal,
-                  class: "time-range__list__item"
-                }, toDisplayString(apmVal ? _ctx.customText[apmVal] : apmVal), 1);
+                  class: "time-range__list__item",
+                  onClick: () => setScrollBarPosition("tlapm", apmVal)
+                }, toDisplayString(apmVal ? _ctx.customText[apmVal] : apmVal), 9, _hoisted_16);
               }), 128))
             ], 544)
           ])) : createCommentVNode("", true)
@@ -686,7 +714,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const TimeList_vue_vue_type_style_index_0_scoped_bbb19562_lang = "";
+const TimeList_vue_vue_type_style_index_0_scoped_555d92cd_lang = "";
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
   for (const [key, val] of props) {
@@ -694,8 +722,8 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const ReTimeList = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-bbb19562"]]);
-const _hoisted_1$2 = { class: "re-field-shell__content" };
+const ReTimeList = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-555d92cd"]]);
+const _hoisted_1$3 = { class: "re-field-shell__content" };
 const _hoisted_2 = {
   key: 0,
   class: "re-field-shell__content__prefix"
@@ -717,7 +745,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock("div", {
         class: normalizeClass(["re-field-shell", { "re-field-shell--disabled": _ctx.disabled }])
       }, [
-        createElementVNode("div", _hoisted_1$2, [
+        createElementVNode("div", _hoisted_1$3, [
           unref(slots).prefix ? (openBlock(), createElementBlock("div", _hoisted_2, [
             renderSlot(_ctx.$slots, "prefix")
           ])) : createCommentVNode("", true),
@@ -750,25 +778,19 @@ const useCalcElement = (getElement) => {
     showPosition
   };
 };
+const _hoisted_1$2 = { class: "re-collapse-transition" };
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   __name: "WrapTransition",
   props: {
-    show: { type: Boolean, default: false },
-    border: { type: Boolean, default: true },
-    whiteBg: { type: Boolean, default: true }
+    show: { type: Boolean, default: false }
   },
   setup(__props) {
     return (_ctx, _cache) => {
       return openBlock(), createBlock(Transition, { mode: "out-in" }, {
         default: withCtx(() => [
-          withDirectives(createElementVNode("div", {
-            class: normalizeClass(["re-collapse-transition", {
-              "re-collapse-transition--border": _ctx.border,
-              "re-collapse-transition--white-bg": _ctx.whiteBg
-            }])
-          }, [
+          withDirectives(createElementVNode("div", _hoisted_1$2, [
             renderSlot(_ctx.$slots, "default")
-          ], 2), [
+          ], 512), [
             [vShow, _ctx.show]
           ])
         ]),
@@ -818,8 +840,8 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const FieldShellExpandTransition_vue_vue_type_style_index_0_scoped_7f0f2668_lang = "";
-const FieldShellExpandTransition = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-7f0f2668"]]);
+const FieldShellExpandTransition_vue_vue_type_style_index_0_scoped_65c7dc43_lang = "";
+const FieldShellExpandTransition = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-65c7dc43"]]);
 const useExpandTransition = (options = {}) => {
   const isExpand = ref(false);
   const handleExpandStatus = (isToggle = true, status = false) => {
@@ -863,7 +885,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     showHeader: { type: Boolean, default: true },
     hourRange: { default: () => [] },
     minRange: { default: () => [] },
-    secRange: { default: () => [] }
+    secRange: { default: () => [] },
+    hourInterval: { default: 1 },
+    minInterval: { default: 1 },
+    secInterval: { default: 1 }
   },
   emits: ["update:modelValue", "open", "close", "change"],
   setup(__props, { emit: __emit }) {
@@ -1146,9 +1171,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               "hour-range": _ctx.hourRange,
               "min-range": _ctx.minRange,
               "sec-range": _ctx.secRange,
+              "hour-interval": _ctx.hourInterval,
+              "min-interval": _ctx.minInterval,
+              "sec-interval": _ctx.secInterval,
               "h-mode": unref(hMode),
               onUpdateTime: updateTime
-            }, null, 8, ["time-data", "time-string", "is-valid-model-value", "show", "show-header", "is-valid-a-type", "format-type", "apm-column-placement", "custom-text", "hour-range", "min-range", "sec-range", "h-mode"])
+            }, null, 8, ["time-data", "time-string", "is-valid-model-value", "show", "show-header", "is-valid-a-type", "format-type", "apm-column-placement", "custom-text", "hour-range", "min-range", "sec-range", "hour-interval", "min-interval", "sec-interval", "h-mode"])
           ]),
           _: 3
         }, 8, ["show", "get-anchor-element"])
@@ -1156,8 +1184,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const TimePicker_vue_vue_type_style_index_0_scoped_be8857f6_lang = "";
-const ReTimePicker = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-be8857f6"]]);
+const TimePicker_vue_vue_type_style_index_0_scoped_d5c5b05d_lang = "";
+const ReTimePicker = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-d5c5b05d"]]);
 export {
   ReTimePicker as default
 };
