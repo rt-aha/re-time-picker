@@ -86,9 +86,14 @@ Whether to show the header in the dropdown
 - type: `Array<[number, number] | number>`
 - default: `[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]`
 
-The range can be set like `[0, 1, 2, [4, 10], 10, 11, 12]`
+The given type as `[number, number]` element present as the range.
+e.g. `[0, [1, 3], [6, 8], 9]` will generate a range list to `[0, 1, 2, 3, 6, 7, 8]`.
+
 The number in the array which over 23 will be eliminated.
 If the format's hour token give `h` or `hh`, the number over 11 will be eliminated.
+
+The array will be remove the duplicated number and sort in numerical.
+e.g. the given range as  `[0, 1, 3, 1, 1, 2, [6, 10], 10, 2, 11, 12]` with `h` format, the final range will be `[0, 1, 2, 3, 6, 7, 8, 9, 10, 11]`
 
 ::: warning
 If the element type is not number will be ignored.
@@ -108,6 +113,7 @@ Same as hourRange, the only different is maxmium number is 59.
 
 Same as hourRange, the only different is maxmium number is 59.
 
+
 ## hourInterval
 - type: `number`
 - default: 1
@@ -125,63 +131,3 @@ Same as hourInterval.
 - default: 1
 
 Same as hourInterval.
-
-# Events
-
-## open
-
-Trigger when dropdown open
-
-```vue
-<template>
-  <ReTimePicker v-model="value" @open="open" />
-</template>
-
-<script setup lang="ts">
-// import ...
-
-const value = ref('10:10:10 上午');
-const open = () => {
-  console.log('open');
-};
-</script>
-```
-
-
-## close
-
-Trigger when dropdown close
-
-```vue
-<template>
-  <ReTimePicker v-model="value" @close="close" />
-</template>
-
-<script setup lang="ts">
-// import ...
-
-const value = ref('10:10:10 上午');
-const close = () => {
-  console.log('close');
-};
-</script>
-```
-
-## change
-
-Trigger when value changed
-
-```vue
-<template>
-  <ReTimePicker v-model="value" @change="change" />
-</template>
-
-<script setup lang="ts">
-// import ...
-
-const value = ref('10:10:10 上午');
-const change = (val) => {
-  console.log('change', val);
-};
-</script>
-```

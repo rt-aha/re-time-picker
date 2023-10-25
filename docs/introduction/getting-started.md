@@ -2,19 +2,19 @@
 
 ## Installation
 
-### NPM
+### npm
 
 ```
 npm install re-time-picker
 ```
 
-### YARN
+### yarn
 
 ```
 yarn add re-time-picker
 ```
 
-### PNPM
+### pnpm
 
 ```
 pnpm install re-time-picker
@@ -51,6 +51,6 @@ In the SFC(`.vue`)
 import ReTimePicker from 're-time-picker';
 import 're-time-picker/dist/style.css';
 
-const value = ref('10:10:10 上午');
+const value = ref('10:10:10 AM');
 </script>
 ```

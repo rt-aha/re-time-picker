@@ -12,7 +12,7 @@ Trigger when dropdown open
 <script setup lang="ts">
 // import ...
 
-const value = ref('10:10:10 上午');
+const value = ref('10:10:10 AM');
 const open = () => {
   console.log('open');
 };
@@ -32,7 +32,7 @@ Trigger when dropdown close
 <script setup lang="ts">
 // import ...
 
-const value = ref('10:10:10 上午');
+const value = ref('10:10:10 AM');
 const close = () => {
   console.log('close');
 };
@@ -51,7 +51,7 @@ Trigger when value changed
 <script setup lang="ts">
 // import ...
 
-const value = ref('10:10:10 上午');
+const value = ref('10:10:10 AM');
 const change = (val) => {
   console.log('change', val);
 };

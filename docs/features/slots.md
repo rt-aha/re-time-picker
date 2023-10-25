@@ -12,7 +12,7 @@ The space at the left of the field
 
 <script setup lang="ts">
 // import ...
-const value = ref('10:10:10 上午');
+const value = ref('10:10:10 AM');
 </script>
 ```
 
@@ -28,7 +28,7 @@ The space at the right of the field
 
 <script setup lang="ts">
 // import ...
-const value = ref('10:10:10 上午');
+const value = ref('10:10:10 AM');
 </script>
 ```
 
@@ -44,7 +44,7 @@ The space at the top in the dropdown
 
 <script setup lang="ts">
 // import ...
-const value = ref('10:10:10 上午');
+const value = ref('10:10:10 AM');
 </script>
 ```
 

@@ -8,8 +8,7 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Home', link: '/' },
-      // { text: 'Examples', link: '/markdown-examples' },
+      { text: 'Doc', link: '/introduction/getting-started' },
     ],
 
     sidebar: [
@@ -25,15 +24,19 @@ export default defineConfig({
         items: [
           {
             text: 'Props',
-            link: '/props/index',
+            link: '/features/props',
           },
           {
             text: 'Slots',
-            link: '/slots/index',
+            link: '/features/slots',
           },
           {
             text: 'Events',
-            link: '/events/index',
+            link: '/features/events',
+          },
+          {
+            text: 'Style',
+            link: '/features/style',
           },
         ],
       },
