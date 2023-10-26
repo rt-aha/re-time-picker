@@ -1,6 +1,6 @@
 {
   "name": "re-time-picker",
-  "version": "0.0.25-beta03",
+  "version": "0.0.25-beta04",
   "license": "ISC",
   "author": "Ray Tsai",
   "description": "A time-picker component base on vue 3 with typescript.",

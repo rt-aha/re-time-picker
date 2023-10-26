@@ -12,7 +12,7 @@ hero:
       link: /introduction/getting-started
     - theme: alt
       text: Document
-      link: /props/index
+      link: /features/props
 
 ---
 
