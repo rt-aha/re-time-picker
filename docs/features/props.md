@@ -28,17 +28,68 @@ The prop `format` and `v-model` should be order in **hour:minute(:second)** form
 If prop `format` or `v-model` are invalid, it will fallback to default format as `HH:mm:ss A`
 
 
+```vue
+<template>
+  <div class="v-time-picker">
+    <ReTimePicker
+      v-model="val1"
+      format="HH:mm A"
+    />
+
+    <ReTimePicker
+      v-model="val2"
+      format="A hh:mm:ss"
+    />
+  </div>
+</template>
+
+<script setup lang="ts">
+const val1 = ref('18:10:12 AM'); // 18:10 am
+const val2 = ref('18:10:12 AM'); // AM 06:10:12
+</script>
+```
+
 ## disabled
 - type: `boolean`
 - default: false
 
 Not allow to use.
 
+```vue
+<template>
+  <div class="v-time-picker">
+    <ReTimePicker
+      v-model="val"
+      disabled
+    />
+  </div>
+</template>
+
+<script setup lang="ts">
+const val = ref('18:10:12 AM');
+</script>
+```
+
 ## apmColumnPlacement
 - type: `'first' | 'last'`
 - default: `'last'`
 
 controll the column order in the dropdown.
+
+```vue
+<template>
+  <div class="v-time-picker">
+    <ReTimePicker
+      v-model="val"
+      apm-column-placement="first"
+    />
+  </div>
+</template>
+
+<script setup lang="ts">
+const val = ref('18:10:12 AM');
+</script>
+```
 
 ## customText
 - type: 
@@ -68,19 +119,64 @@ interface CustomText {
 
 **hour**, **min**, **sec**, **apm** are for the header text 
 
+```vue
+<template>
+  <div class="v-time-picker">
+    <ReTimePicker
+      v-model="val"
+      :custom-text="customText"
+    />
+  </div>
+</template>
+
+<script setup lang="ts">
+const val = ref('18:10:12 AM');
+const customText = {
+  am: '上午',
+  pm: '下午',
+  hour: '時',
+  min: '分',
+  sec: '秒',
+  apm: '上午/下午',
+};
+</script>
+```
+
 ## showIcon
 - type: `boolean`
-- default: false
+- default: true
 
 Whether to show the clock icon at left
 
 If you'd like to put custom icon, use the slot suffix
 
+```vue
+<template>
+  <div class="v-time-picker">
+    <ReTimePicker
+      v-model="val"
+      show-icon
+    />
+  </div>
+</template>
+```
+
 ## showHeader
 - type: `boolean`
-- default: false
+- default: true
 
 Whether to show the header in the dropdown
+
+```vue
+<template>
+  <div class="v-time-picker">
+    <ReTimePicker
+      v-model="val"
+      show-header
+    />
+  </div>
+</template>
+```
 
 ## hourRange
 - type: `Array<[number, number] | number>`
@@ -101,11 +197,58 @@ If the element type is not number will be ignored.
 Additionally, it will check the type [number, number], if first number is larger than second number, this [number, number] element will be ignored as well.
 :::
 
+```vue
+<template>
+  <div class="v-time-picker">
+    <ReTimePicker
+      v-model="val1"
+      :hour-range="hourRange1"
+    />
+
+    <ReTimePicker
+      v-model="val2"
+      format="hh:mm:ss A"
+      :hour-range="hourRange2"
+    />
+  </div>
+</template>
+
+<script setup lang="ts">
+const val1 = ref('18:10:12 AM');
+const val2 = ref('18:10:12 AM');
+const hourRange1 = [[0, 24]];
+const hourRange2 = [[0, 24]];
+</script>
+```
+
 ## minRange
 - type: `Array<[number, number] | number>`
 - default: `[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59]`
 
 Same as hourRange, the only different is maxmium number is 59.
+
+```vue
+<template>
+  <div class="v-time-picker">
+    <ReTimePicker
+      v-model="val1"
+      :min-range="minRange1"
+    />
+
+    <ReTimePicker
+      v-model="val2"
+      :min-range="minRange2"
+    />
+  </div>
+</template>
+
+<script setup lang="ts">
+const val1 = ref('18:10:12 AM');
+const val2 = ref('18:10:12 AM');
+const minRange1 = [[0, 9], [50, 59]];
+const minRange2 = [62, 31, 21, 0, [1, 50], 51];
+</script>
+```
 
 ## secRange
 - type: `Array<[number, number] | number>`
@@ -113,6 +256,28 @@ Same as hourRange, the only different is maxmium number is 59.
 
 Same as hourRange, the only different is maxmium number is 59.
 
+```vue
+<template>
+  <div class="v-time-picker">
+    <ReTimePicker
+      v-model="val1"
+      :sec-range="secRange1"
+    />
+
+    <ReTimePicker
+      v-model="val2"
+      :sec-range="secRange2"
+    />
+  </div>
+</template>
+
+<script setup lang="ts">
+const val1 = ref('18:10:12 AM');
+const val2 = ref('18:10:12 AM');
+const secRange1 = [[0, 9], [50, 59]];
+const secRange2 = [62, 31, 21, 0, [1, 50], 51];
+</script>
+```
 
 ## hourInterval
 - type: `number`
@@ -120,14 +285,84 @@ Same as hourRange, the only different is maxmium number is 59.
 
 The given number allows you to give hourRange in certain interval. It will execute after the hourRange, which mins you can give an hourRange like `[1, 2, 3, 4, [6, 10], [11, 20]]` and interval as `2`, the final hourRange will be [10, 11, 20].
 
+```vue
+<template>
+  <div class="v-time-picker">
+    <ReTimePicker
+      v-model="val1"
+      :hour-interval="15"
+    />
+
+    <ReTimePicker
+      v-model="val2"
+      :hour-range="hourRange"
+      :hour-interval="10"
+    />
+  </div>
+</template>
+
+<script setup lang="ts">
+const val1 = ref('18:10:12 AM');
+const val2 = ref('18:10:12 AM');
+const hourRange = [10, 31, 20, 0, [1, 50], 51];
+</script>
+```
+
 ## minInterval
 - type: `number`
 - default: 1
 
 Same as hourInterval.
 
+```vue
+<template>
+  <div class="v-time-picker">
+    <ReTimePicker
+      v-model="val1"
+      :min-interval="5"
+    />
+
+    <ReTimePicker
+      v-model="val2"
+      :min-range="minRange"
+      :min-interval="15"
+    />
+  </div>
+</template>
+
+<script setup lang="ts">
+const val1 = ref('18:10:12 AM');
+const val2 = ref('18:10:12 AM');
+const minRange = [10, 30, 20, 0, [1, 50], 51];
+</script>
+```
+
 ## secInterval
 - type: `number`
 - default: 1
 
 Same as hourInterval.
+
+
+```vue
+<template>
+  <div class="v-time-picker">
+    <ReTimePicker
+      v-model="val1"
+      :sec-interval="5"
+    />
+
+    <ReTimePicker
+      v-model="val2"
+      :sec-range="secRange"
+      :sec-interval="15"
+    />
+  </div>
+</template>
+
+<script setup lang="ts">
+const val1 = ref('18:10:12 AM');
+const val2 = ref('18:10:12 AM');
+const secRange = [10, 30, 20, 0, [1, 50], 51];
+</script>
+```

@@ -37,6 +37,8 @@ The default setting is following:
 ```
 
 
+Created another file to overwrite default setting.
+
 e.g. a field with border-bottom only.
 
 ```css
