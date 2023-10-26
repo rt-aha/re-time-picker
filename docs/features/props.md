@@ -70,7 +70,7 @@ const val = ref('18:10:12 AM');
 </script>
 ```
 
-## apmColumnPlacement
+## apm-column-placement
 - type: `'first' | 'last'`
 - default: `'last'`
 
@@ -91,7 +91,7 @@ const val = ref('18:10:12 AM');
 </script>
 ```
 
-## customText
+## custom-text
 - type: 
 ```ts
 interface CustomText {
@@ -142,7 +142,7 @@ const customText = {
 </script>
 ```
 
-## showIcon
+## show-icon
 - type: `boolean`
 - default: true
 
@@ -161,7 +161,7 @@ If you'd like to put custom icon, use the slot suffix
 </template>
 ```
 
-## showHeader
+## show-header
 - type: `boolean`
 - default: true
 
@@ -178,7 +178,7 @@ Whether to show the header in the dropdown
 </template>
 ```
 
-## hourRange
+## hour-range
 - type: `Array<[number, number] | number>`
 - default: `[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]`
 
@@ -221,7 +221,7 @@ const hourRange2 = [[0, 24]];
 </script>
 ```
 
-## minRange
+## min-range
 - type: `Array<[number, number] | number>`
 - default: `[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59]`
 
@@ -250,7 +250,7 @@ const minRange2 = [62, 31, 21, 0, [1, 50], 51];
 </script>
 ```
 
-## secRange
+## sec-range
 - type: `Array<[number, number] | number>`
 - default: `[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59]`
 
@@ -279,7 +279,7 @@ const secRange2 = [62, 31, 21, 0, [1, 50], 51];
 </script>
 ```
 
-## hourInterval
+## hour-interval
 - type: `number`
 - default: 1
 
@@ -308,7 +308,7 @@ const hourRange = [10, 31, 20, 0, [1, 50], 51];
 </script>
 ```
 
-## minInterval
+## min-interval
 - type: `number`
 - default: 1
 
@@ -337,7 +337,7 @@ const minRange = [10, 30, 20, 0, [1, 50], 51];
 </script>
 ```
 
-## secInterval
+## sec-interval
 - type: `number`
 - default: 1
 
